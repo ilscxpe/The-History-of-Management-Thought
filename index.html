@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Тренажёр к тесту по истории управленческой мысли: теория, билеты, экзамен.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Билеты по ИУМ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: экзаменационный тренажёр в духе ПДД — шапка с таймером, плитки-номера вопросов, карточка вопроса, разбор ответа */
+:root{
+  --bg:#edf1f7; --surface:#ffffff; --surface2:#f5f7fb; --ink:#14213a; --muted:#5b6882; --line:#d4dbe7;
+  --sign:#1f56c4; --sign-ink:#ffffff; --sign-soft:#e2eafa;
+  --ok:#1b8a4a; --ok-soft:#dff3e7; --bad:#cf3a2e; --bad-soft:#fbe4e1; --warn:#b97f00; --warn-soft:#fbf0d4;
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1420; --surface:#162032; --surface2:#1b2740; --ink:#e6ecf6; --muted:#97a4bc; --line:#2a3852;
+  --sign:#5089f2; --sign-ink:#0b1220; --sign-soft:#1c2c4d;
+  --ok:#3cc274; --ok-soft:#173726; --bad:#ff6a5e; --bad-soft:#3f1d1c; --warn:#f0bb3c; --warn-soft:#3a2e12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1420; --surface:#162032; --surface2:#1b2740; --ink:#e6ecf6; --muted:#97a4bc; --line:#2a3852;
+  --sign:#5089f2; --sign-ink:#0b1220; --sign-soft:#1c2c4d;
+  --ok:#3cc274; --ok-soft:#173726; --bad:#ff6a5e; --bad-soft:#3f1d1c; --warn:#f0bb3c; --warn-soft:#3a2e12; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sign);outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+.display{font-family:var(--f-display);letter-spacing:-.01em}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.sign{width:34px;height:34px;border-radius:8px;background:var(--sign);color:var(--sign-ink);display:grid;place-items:center;font-family:var(--f-display);font-size:13px;font-weight:700;flex:none}
+.brand b{font-family:var(--f-display);font-size:14px;font-weight:700;display:block;line-height:1.2}
+.brand small{color:var(--muted);font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.count{display:flex;flex-direction:column;align-items:flex-end;gap:0}
+.count .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.count .t{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-weight:700;font-size:20px;color:var(--sign)}
+.count.soon .t{color:var(--warn)} .count.live .t{color:var(--bad)}
+.iconbtn{border:1px solid var(--line);background:var(--surface2);border-radius:8px;padding:6px 10px;font-size:13px;color:var(--muted)}
+
+main{padding-block:20px 60px}
+.screen[hidden]{display:none!important}
+
+/* gate screens */
+.gate{max-width:460px;margin:8vh auto 0;display:flex;flex-direction:column;gap:18px}
+.gate h1{font-family:var(--f-display);font-size:26px;line-height:1.2}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.field input{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:12px 14px;font-size:17px;width:100%}
+.field input:focus{border-color:var(--sign);outline:none}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;padding:13px 18px;font-weight:600;background:var(--sign);color:var(--sign-ink);font-size:16px}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:default}
+.hintchip{border:1px dashed var(--sign);background:var(--sign-soft);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:14px}
+.err{color:var(--bad);font-size:14px;min-height:1.2em}
+
+/* menu */
+.hello{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.hello h1{font-family:var(--f-display);font-size:24px}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:26px}
+.mode{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:118px}
+.mode:hover{border-color:var(--sign)}
+.mode .k{font-family:var(--f-display);font-size:15px;font-weight:700}
+.mode .d{font-size:14px;color:var(--muted)}
+.mode.primary{background:var(--sign);color:var(--sign-ink);border-color:var(--sign)}
+.mode.primary .d{color:inherit;opacity:.85}
+.sechead{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin:22px 0 10px}
+.seclist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.sec{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:0;border-top:1px solid var(--line);background:none;text-align:left;width:100%}
+.sec:first-child{border-top:0}
+.sec:hover{background:var(--surface2)}
+.sec .num{font-family:var(--f-mono);font-weight:700;color:var(--sign);font-size:14px}
+.sec .nm{font-weight:600;min-width:0}
+.sec .nm small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.prog{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meter{width:70px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok)}
+.tickets{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}
+.ticket{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 4px;font-family:var(--f-mono);font-weight:700;text-align:center}
+.ticket.done{border-color:var(--ok);color:var(--ok)} .ticket.fail{border-color:var(--bad);color:var(--bad)}
+.ticket small{display:block;font-family:var(--f-body);font-weight:400;font-size:11px;color:var(--muted)}
+.settings{margin-top:28px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--surface);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.settings img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--surface2)}
+.settings .txt{flex:1;min-width:180px;font-size:14px}
+
+/* quiz */
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.qtop .ttl{font-weight:700}
+.timer{font-family:var(--f-mono);font-weight:700;font-variant-numeric:tabular-nums;padding:4px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
+.grid{display:flex;gap:5px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px;scrollbar-width:thin}
+.tile{flex:none;width:34px;height:34px;border-radius:7px;border:1px solid var(--line);background:var(--surface);font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--muted)}
+.tile.cur{border:2px solid var(--sign);color:var(--sign)}
+.tile.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.tile.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.card .head{padding:16px 18px 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{font-size:12px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:6px;background:var(--sign-soft);color:var(--sign)}
+.tag.lec{background:var(--warn-soft);color:var(--warn)}
+.qtext{padding:4px 18px 16px;font-size:18px;font-weight:600;line-height:1.45;max-width:72ch}
+.photo{margin:0 18px 16px;width:280px;max-width:calc(100% - 36px);height:auto;border-radius:12px;background:var(--surface2);border:1px solid var(--line);display:block}
+.opts{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.opt{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;text-align:left;padding:13px 18px;border:0;border-bottom:1px solid var(--line);background:none;width:100%;line-height:1.45}
+.opt:last-child{border-bottom:0}
+.opt:hover:not(:disabled){background:var(--surface2)}
+.opt:disabled{cursor:default}
+.opt .L{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--muted)}
+.opt.right{background:var(--ok-soft)} .opt.right .L{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{background:var(--bad-soft)} .opt.wrong .L{background:var(--bad);border-color:var(--bad);color:#fff}
+.expl{border-top:1px solid var(--line);padding:14px 18px;background:var(--surface2)}
+.expl b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.expl.ok b{color:var(--ok)} .expl.bad b{color:var(--bad)}
+.expl p{margin:0;max-width:72ch}
+.qnav{display:flex;gap:10px;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+
+/* overlay */
+.ov{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+.ov.red{background:#c4170c;color:#fff;animation:flash .45s steps(2) 4}
+.ov.green{background:#14843f;color:#fff}
+.ov h2{font-family:var(--f-display);font-size:clamp(30px,8vw,64px);line-height:1.1;text-transform:uppercase}
+.ov p{font-size:18px;opacity:.9}
+.ov .btn{background:#fff;color:#111;margin-top:18px}
+@keyframes flash{0%{background:#c4170c}100%{background:#ff2b1c}}
+@media (prefers-reduced-motion:reduce){.ov.red{animation:none}}
+
+/* result */
+.res{display:flex;flex-direction:column;gap:16px}
+.score{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.score .big{font-family:var(--f-display);font-size:44px;font-weight:700;line-height:1}
+.verdict{font-family:var(--f-display);font-size:18px}
+.verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+.mlist{display:flex;flex-direction:column;gap:10px}
+.mitem{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:10px;padding:12px 14px;font-size:15px}
+.mitem .a{color:var(--ok);font-weight:600;margin-top:4px}
+
+/* theory */
+.th{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 78px);display:flex;flex-direction:column;gap:2px}
+.toc button{border:0;background:none;text-align:left;padding:8px 10px;border-radius:8px;font-size:14px;color:var(--muted)}
+.toc button.on{background:var(--sign-soft);color:var(--sign);font-weight:600}
+.tbody{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.tbody h2{font-family:var(--f-display);font-size:20px;margin-bottom:4px}
+.tbody h3{font-size:16px;margin:20px 0 6px;color:var(--sign)}
+.tbody p,.tbody li{max-width:70ch}
+.tbody ul,.tbody ol{padding-left:20px;margin:6px 0}
+.tbody li{margin:3px 0}
+.key{background:var(--warn-soft);border-left:4px solid var(--warn);padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;font-size:14px;min-width:420px;width:100%}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.d{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700;color:var(--sign)}
+.tsel{display:none}
+@media (max-width:720px){
+  .th{grid-template-columns:1fr}
+  .toc{display:none}
+  .tsel{display:block;width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);margin-bottom:12px;font-size:15px}
+  .qtext{font-size:17px}
+  .count .t{font-size:17px}
+}
+</style>
+
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <div class="brand"><div class="sign">ИУМ</div><div style="min-width:0"><b>Билеты по ИУМ</b><small id="who">Маршев · §1.2–4.1</small></div></div>
+  <div class="count" id="countBox" hidden><span class="lbl" id="countLbl">До теста</span><span class="t" id="countT">--:--:--</span></div>
+  <button class="iconbtn" id="editBtn" hidden>Изменить</button>
+</div></div>
+
+<main class="wrap">
+
+<section class="screen" id="sName">
+  <div class="gate">
+    <div class="sign" style="width:48px;height:48px;font-size:16px">ИУМ</div>
+    <h1>Тренажёр к тесту по истории управленческой мысли</h1>
+    <p class="muted" style="margin:0">Перед входом представьтесь.</p>
+    <div class="field"><label for="inName">Имя</label><input id="inName" autocomplete="given-name" placeholder="Иван"></div>
+    <div class="field"><label for="inSurname">Фамилия</label><input id="inSurname" autocomplete="family-name" placeholder="Иванов"></div>
+    <div class="err" id="nameErr"></div>
+    <button class="btn" id="nameNext">Далее</button>
+  </div>
+</section>
+
+<section class="screen" id="sTime" hidden>
+  <div class="gate">
+    <h1>Когда начинается тест?</h1>
+    <p class="muted" style="margin:0">Тест — в эту субботу. Введите время начала по Москве, сверху появится отсчёт.</p>
+    <div class="field"><label for="inTime">Время</label><input id="inTime" type="time"></div>
+    <div class="row"><button class="hintchip" id="m308">Группа М308 — 20:30</button></div>
+    <div class="err" id="timeErr"></div>
+    <div class="row"><button class="btn ghost" id="timeBack">Назад</button><button class="btn" id="timeNext" style="flex:1">Запустить отсчёт</button></div>
+  </div>
+</section>
+
+<section class="screen" id="sMenu" hidden>
+  <div class="hello"><div><p class="muted" style="margin:0 0 2px">Удачи на тесте,</p><h1 id="helloName">студент</h1></div>
+    <div class="prog" id="totalProg"></div></div>
+  <div class="modes">
+    <button class="mode primary" data-go="exam"><span class="k">Экзамен</span><span class="d">20 случайных вопросов, 20 минут. Сдано, если ошибок не больше двух.</span></button>
+    <button class="mode" data-go="theory"><span class="k">Теория</span><span class="d">Кратко по каждому параграфу, даты и «кто есть кто».</span></button>
+    <button class="mode" data-go="lec"><span class="k">Как на лекции</span><span class="d">Длинные вопросы на 6 вариантов в стиле слайдов преподавателя.</span></button>
+    <button class="mode" data-go="mist"><span class="k">Мои ошибки</span><span class="d" id="mistD">Вопросы, где вы ошиблись.</span></button>
+    <button class="mode" data-go="marathon"><span class="k">Марафон</span><span class="d" id="marD">Все вопросы подряд в случайном порядке.</span></button>
+  </div>
+  <div class="sechead">Разделы по параграфам</div>
+  <div class="seclist" id="secParas"></div>
+  <div class="sechead">Сквозные разделы</div>
+  <div class="seclist" id="secCross"></div>
+  <div class="sechead">Билеты</div>
+  <div class="tickets" id="tickets"></div>
+  <div class="settings">
+    <div class="txt"><b>Прогресс</b><br><span class="muted">Ошибки, статистика и результаты билетов хранятся в этом браузере.</span></div>
+    <button class="btn ghost" id="resetBtn">Сбросить прогресс</button>
+  </div>
+  <p class="err" id="resetMsg"></p>
+</section>
+
+<section class="screen" id="sQuiz" hidden>
+  <div class="qtop"><span class="ttl" id="qTitle"></span><span class="row" style="align-items:center"><span class="timer" id="qTimer" hidden></span><button class="iconbtn" id="qExit">В меню</button></span></div>
+  <div class="grid" id="qGrid"></div>
+  <div class="card" id="qCard"></div>
+  <div class="qnav"><button class="btn ghost" id="qPrev">Назад</button><button class="btn" id="qNext">Далее</button></div>
+</section>
+
+<section class="screen" id="sRes" hidden>
+  <div class="res" id="resBody"></div>
+</section>
+
+<section class="screen" id="sTheory" hidden>
+  <div class="qtop"><span class="ttl display" style="font-size:18px">Теория</span><button class="iconbtn" id="thExit">В меню</button></div>
+  <select class="tsel" id="thSel" aria-label="Раздел теории"></select>
+  <div class="th"><nav class="toc" id="thToc"></nav><article class="tbody" id="thBody"></article></div>
+</section>
+
+</main>
+
+<div class="ov" id="ov" hidden></div>
+
+<!-- ===================== ТЕОРИЯ ===================== -->
+<div hidden id="theoryStore">
+<div data-k="t12" data-n="§1.2 Организация и управление">
+<h2>§1.2. Введение в «Организацию» и «Управление организацией»</h2>
+<p class="muted">Учебник В. И. Маршева. Главная мысль параграфа: неудачи организаций идут от непонимания самой организации и от неумения ею управлять.</p>
+<h3>Почему люди объединяются</h3>
+<ul>
+<li><b>Минцберг</b> («Менеджмент»): «общество превратилось в общество организаций… в конце пути организации нас хоронят».</li>
+<li><b>Платон</b> («Государство»): люди собираются, чтобы оказывать друг другу помощь, — это и есть государство. <b>Аристотель</b>: человек — «животное государственное (полисное)», но «от природы склонен образовывать скорее пары, а не государства».</li>
+<li>Две ключевые причины: 1) <b>природные потребности</b> (биологическое начало); 2) <b>врождённое неравенство способностей</b>.</li>
+</ul>
+<h3>Чужие определения и модели</h3>
+<ul>
+<li>Три интерпретации слова «организация»: социальный институт (объект); свойство (организованная фирма); процесс/функция.</li>
+<li><b>Блау и Скотт</b> — формализация, формальная структура. <b>Барнард</b> — кооперация с сознательностью, предсказуемостью, целенаправленностью. <b>Бодди и Пэйтон</b> — индивиды влияют на других ради целей. <b>Марч и Саймон</b> — сообщество с центральной координационной системой, похоже на организм; люди — «механизмы принятия решений».</li>
+<li><b>Алмаз Ливитта (1965)</b>: Персонал, Структура, Миссия/Задачи, Технология.</li>
+<li><b>7S McKinsey</b>: Structure, System, Strategy, Staff, Shared Values, Skills, Style. Последние три по сути характеризуют Staff.</li>
+<li><b>Бодди и Пэйтон</b>: Технологию заменили Бизнес-процессами, добавили Технику, Власть, Культуру.</li>
+<li>Общее у всех моделей: элементы взаимосвязаны — отсюда «Алмаз».</li>
+</ul>
+<h3>Определения Маршева</h3>
+<div class="key"><b>Опр. 1. Организация</b> — совокупность двух и более «лиц» (в теоретико-игровом смысле: физических или юридических), обладающих двумя атрибутами: <b>общей целью (миссией)</b> и <b>формализованными структурированными отношениями</b>.</div>
+<ul>
+<li>Структура = элементы и связи между ними. В английском: organization (объект) и organizing (процесс).</li>
+<li><b>Статика</b> — лица с двумя атрибутами. <b>Динамика</b> — «жизнь организации», 5 ролей: поиск и приобретение ресурсов → преобразование в продукты → распределение → обмен → потребление.</li>
+<li>Люди <b>исключены из ресурсов</b>: люди — единственные элементы организации, всё остальное — ресурсы.</li>
+</ul>
+<div class="key"><b>Опр. 2. Модель организации</b> — система из трёх элементов: <b>индивидуумы, цели, структура</b>. Структура = роли и сценарии их исполнения, оформленные в документах (клятвы, учредительные договоры, уставы, должностные инструкции, планы…).</div>
+<ul>
+<li>Перечень ролей не задан: в одной фирме нет «Маркетинга», в другой — «PR». Так отражается понимание людьми внутренней и внешней среды.</li>
+<li>Сегодня более <b>40 функционалов</b> (табл. 1.1): Diversity of HR (2017, Apple), Digitalization (2018–2019), Security&amp;Insurance of ArtIntellect (2019). Критерий: минимизация рисков потери жизнеспособности и конкурентоспособности. «Функционал», а не «функция»: зависит от множества <i>зависимых</i> переменных.</li>
+<li><b>Файоль (1916)</b>: 6 групп операций — технические, коммерческие, финансовые, страховые, учётные, административные (предвидение, организация, распорядительство, координирование, контроль).</li>
+<li>Внутриорганизационные процессы: ППР, коммуникации, конфликты, лидерство, бизнес-процессы.</li>
+</ul>
+<h3>Жизненные циклы</h3>
+<ul>
+<li><b>Полибий</b> (II в. до н. э.) — термин «цикличность»: зарождение, расцвет, упадок.</li>
+<li>Первенство систематического изучения — эпоха Просвещения: Локк, <b>Вико</b> (век богов, героев, людей), Монтескье, Берк, <b>Кондорсе</b> (10 этапов).</li>
+<li>XX в.: Шпенглер «Закат Европы» (1919), Тойнби «Исследование истории» (1946), Тавистокская школа, Эриксон.</li>
+<li>Резкая критика биологических аналогий — <b>Эдит Пенроуз</b>: организмы живут химией, а не осознанными решениями.</li>
+<li>Модели ЖЦО: <b>Грейнер</b>, <b>Адизес</b>; ЖЦ проектной команды — <b>Капецио</b>.</li>
+</ul>
+<h3>Управление организацией</h3>
+<div class="key"><b>Опр. 3. Управление организацией</b> — воздействие субъекта на организацию, изменяющее её поведение, с <b>7 атрибутами</b>: постоянное, осознанное, осмысленное, целенаправленное, системное, правомочное, ответственное.</div>
+<ul>
+<li>Профессиональное управление отличается от общечеловеческого атрибутами №4–7, а принципиально — одновременным наличием <b>права</b> и <b>ответственности</b>. Пример общечеловеческого: плачущий ребёнок, который «управляет» родителями.</li>
+<li>«Системное» — скорее <b>желательный</b> атрибут; его отсутствие порождает некомпетентное управление.</li>
+<li>Виды ответственности ЛПР: моральная, материальная, юридическая, политическая.</li>
+<li><b>Три вопроса</b> (рис. 1.1): A — каково положение сейчас; B — каким его хотим видеть через N лет; C — как перейти из A в B. Простота A обманчива: ошибка в диагностике A — главная причина провала стратегии.</li>
+<li>Пунктирные стрелки на рис. 1.1 — <b>«НЕ-марковость» (инерционность)</b> социальных процессов: последствия и последействия решений.</li>
+</ul>
+<h3>Почему организации гибнут: «управленческий мазохизм»</h3>
+<ul>
+<li>Бердяев (1930-е): общины ушли, пришли «организации».</li>
+<li>Правило: «Когда они не знают, что делать, они ещё усерднее делают то, что знают».</li>
+<li><b>Форд</b>: «любой автомобиль, лишь бы чёрный» — доля с 56% (1921) до 10% (1927), почти в 6 раз; конкурент — Слоун (GM).</li>
+<li><b>Cisco</b>: Чэмберс обещал +50%, в апреле 2001 — 2,5 млрд $ в неликвиды и 8500 уволенных.</li>
+<li><b>Enron</b> (декабрь 2001): Скиллинг, «фанатик максимального контроля», «понятия не имел».</li>
+<li>Аптечная сеть «36,6»: скупала аптеки с 2004, с 2008 продавала активы. Детройт, Греция, Португалия, Испания. Hertz (2020).</li>
+<li>Банкротства в РФ: 12 401 (2019); 7393 за янв.–сен. 2020; в октябре 2020 — 37 000 в процедурах (ФНС).</li>
+<li>Прогнозы-провалы: индексы ждали +50–60% (2008) — упали более чем на 70%; нефть «200$» — получили 30$ (2009); в 2018 «100$» — рухнула до 53,8$.</li>
+<li>Финансовую систему выстроили, а <b>систему управления</b> ею — нет.</li>
+<li><b>Принцип Питера</b>: «В иерархии каждый служащий стремится достичь своего уровня некомпетентности». Пример — отзыв Пеписа о флоте 1684 г.</li>
+<li>Файоль: «Необходимо ввести в преподавание “предвидение”»; Наполеон: «Gouverner c’est prévoir» — править значит предвидеть.</li>
+<li>Минцберг «Managers Not MBA’s» — по Маршеву, достоин «Нобелевки по менеджменту».</li>
+<li>Две причины ошибок: <b>незнание сущности организации</b> и <b>неумение ею управлять</b>.</li>
+<li><b>П. Сорокин</b>: первопричина изменений в социальных системах — <b>внутренняя</b> среда; внешняя лишь ускоряет или замедляет.</li>
+<li>Цифровизация, Big Data, ИИ; Талеб — «новые луддиты». «Квалификационная яма»: Россия 2018 — 33,9 млн; Сев. и Юж. Америка — 87,6 и 58,6 млн; к 2030 — более 1,4 млрд (ОЭСР).</li>
+<li><b>Рикардо Семлер</b> (TED): «ключ к управлению — избавиться от менеджеров». Маршев: он не эксперт по теории управления.</li>
+</ul>
+<h3>Конгрессы Академии менеджмента (с 1940 г.)</h3>
+<ul>
+<li>8–13 августа 2008, Анахайм — тема «The Questions We Ask?» («почти по Сократу»).</li>
+<li>79-й, август 2019, Бостон — «Understanding the Inclusive Organization»; 25 дивизионов, более 11 000 участников, 5 дней.</li>
+</ul>
+</div>
+
+<div data-k="t14" data-n="§1.4 ИУИ — основы науки">
+<h2>§1.4. Историко-управленческие исследования как основы науки управления</h2>
+<h3>Проблема науки управления</h3>
+<ul>
+<li>Несмотря на лозунги «Менеджмент мёртв», научная составляющая значима (эпиграф — Лоренц фон Штейн).</li>
+<li>Фундаментальные проблемы: предмет науки, категории, связь с другими науками, методы, соотношение искусства и научности, измерения.</li>
+<li>Главная методологическая причина «многоликости» науки — <b>отсутствие налаженных процедур проверки истинности гипотез</b>. Причина: невозможность многократных экспериментов, уникальность условий, трудность измерений.</li>
+</ul>
+<div class="key"><b>Выход:</b> рассматривать <b>реальный жизненный процесс как материал для эксперимента</b> (так делают политэкономия, история, демография, правоведение). Но не всякая практика — эксперимент: соотношение как «данные — информация», «наследство — наследие». Эксперимент — целенаправленно отобранная и научно обработанная часть практики.</div>
+<ul>
+<li>«Многократность» эксперимента: 1) управление <b>постоянно воспроизводится</b> во все времена; 2) специальное изучение фактов из разных периодов.</li>
+<li>Зачем смотреть в прошлое? — «Да потому, что в принципе больше некуда и смотреть!»</li>
+<li>Наука управления — единственная прикладная общественная наука, которая <b>до конца 1960-х</b> не вела целенаправленных ИУИ (начало — трактат <b>Клода Джорджа</b>), хотя управлению более 7 тысяч лет. До 1988 г. исторических разделов в классификациях нет.</li>
+<li>Задача историков: превращать управленческое <b>наследство</b> в теоретическое <b>наследие</b>.</li>
+</ul>
+<h3>Классификация научных основ (табл. 1.2, 1988)</h3>
+<div class="tw"><table><tr><th>1. Фундаментальные</th><th>2. Прикладные</th><th>3. Общие теоретико-исторические</th></tr>
+<tr><td>Философия, экономика, история, география, праксеология, социология, психология, политология, демография</td><td>Планирование, статистика, финансы, учёт, право, психология и социология управления, исследование операций, кибернетика, информатика</td><td>3.1 Наука управления (3.1.1 Теория руководства; 3.1.2 Теория управленческого искусства)<br>3.2 История управления<br>3.3 История управленческой мысли<br>3.4 Историография ИУИ</td></tr></table></div>
+<p>Новизна: рядом с наукой управления — два <b>равноправных</b> раздела: история управления и ИУМ. Впервые — автореферат докторской (1987); определения — статья 1985 г.</p>
+<h3>Определения 4–8</h3>
+<ul>
+<li><b>История управления</b> — процесс возникновения, развития, борьбы и смены <b>конкретных систем управления</b> и управленческих отношений (или знания об этом).</li>
+<li><b>История управленческой мысли</b> — процесс возникновения, развития, борьбы и смены <b>учений, концепций, теорий, взглядов, идей</b> об управлении (или знания об этом).</li>
+<li><b>Историография ИУИ</b> — совокупность ИУИ с древности до сегодня либо критический обзор источников и сравнительный анализ ИУИ. Объект — ИУ и ИУМ; метод — <b>источниковедение</b>; результат — знания о развитии ИУИ.</li>
+<li>«Управление имеет давнее прошлое, но очень короткую историю».</li>
+</ul>
+<h3>Факты и персоны</h3>
+<ul>
+<li>78-й конгресс АОМ (август 2018, Чикаго, дивизион Management History): «Where we were? Where are we? Where we will be?»</li>
+<li><b>1881</b>: Тейлор (26 лет) выигрывает чемпионат США по теннису в паре, а <b>Виктор Гольцев</b> (31 год) уже читает в Московском университете курс «Учение об управлении». Учитель Гольцева — <b>Лоренц фон Штейн</b>, 7 томов Die Verwaltungslehre (1860-е). «Принципы научного управления» Тейлора изданы в России в 1911.</li>
+<li>Мода меняется: управление по целям → стратегический менеджмент; системный → ситуационный; реструктуризация → реинжиниринг; обучение персонала → самообучающаяся организация; costs-driven → value-based и knowledge management. Минцберг — «десять школ стратегий».</li>
+<li>Аналогия с лекарствами от вечных болезней — <b>идиографичность</b>. Формула: «Всякое новое средство — это новая комбинация старых, ранее известных средств, в новых условиях».</li>
+<li>Историографы XVIII–XIX вв.: Де ля Мар; Юсти, Зонненфельс, Циммерман, Брекер, Штейн. Русские: Рождественский, Платонов, Лешков, Бабст, Андреевский, Чичерин, Гольцев, Берендтс, Горбунов, Ивановский.</li>
+<li>Зарубежные монографии ничего не говорят о России (хотя Врен и Бедеян писали о Тейлоре и Гантте в СССР; Видмер 1980 — «Americanizers»).</li>
+<li>Кравченко, Коротков, Макашов–Овчинникова — скорее история управления, а не ИУМ. Конференции по ИУМ в МГУ — с 1996 г. Боуден возглавлял дивизион Management History в 2013–2018.</li>
+<li>Типичная слабость публикаций — нечёткое разделение предметов ИУ и ИУМ, потому что ИУМ ещё не признанное направление.</li>
+</ul>
+<h3>Принцип научного историзма</h3>
+<ol><li>Выявить социально-экономические причины возникновения системы управления или идеи.</li><li>Исследовать формы её проявления в конкретных условиях.</li><li>Установить сходства и различия с прошлым и последующими состояниями.</li></ol>
+<h3>Три способа использовать исторический факт (обобщая Клаузевица «О войне»)</h3>
+<div class="tw"><table><tr><th>Цель</th><th>Название</th><th>Как излагать</th></tr>
+<tr><td>Иллюстрация научной мысли</td><td><b>Исторический образец</b></td><td>Достаточно упомянуть факт</td></tr>
+<tr><td>Подтвердить <b>возможность</b> существования элемента или действенность средства</td><td><b>Историческое доказательство</b></td><td>Указать на факт, обязательно <b>достоверный и правдоподобный</b></td></tr>
+<tr><td>Утвердить <b>непротиворечивость</b> теоретической концепции</td><td><b>Историческое предсказание</b> (самое важное)</td><td>Развернуть подробно, в мельчайших деталях</td></tr></table></div>
+<div class="key">Из одного достоверного факта следует <b>возможность</b>, а не универсальность. Утверждение «работает всегда и везде» требует отдельной теоретической проверки и учёта контекста (вопрос с лекции).</div>
+<ul><li>Историческое предсказание: зная свершившийся факт, исследователь восстанавливает условия и по теоретической схеме логически непротиворечиво «предсказывает» его как необходимый итог. Проверенная концепция пригодна для предвидения.</li>
+<li>Главная трудность: основной метод — наблюдение, а наблюдать можно в основном только <b>текст</b>.</li></ul>
+</div>
+
+<div data-k="t16" data-n="§1.6 Специфика ИУМ">
+<h2>§1.6. Специфические проблемы истории управленческой мысли как науки</h2>
+<ul>
+<li>Наука управления — <b>вторичное образование</b> по отношению к реальной деятельности; ИУМ — история этого вторичного образования.</li>
+<li>Наука управления — <b>идиографическая</b> (а не номографическая): её утверждения зависят от места, времени и исследователя. <b>Ежи Старосьцяк</b> («Элементы науки управления», 1965): катехизиса рецептов нет, ищем общие закономерности.</li>
+<li>Признание идиографичности ИУМ требует переосмыслить термин «парадигма» или отказаться от него.</li>
+<li>Предмет реконструкции — <b>всё</b>, включая отброшенное и ошибочное: важны причины, а не хронология успехов.</li>
+</ul>
+<h3>Факторы развития ИУМ</h3>
+<ol>
+<li><b>Первый фактор</b> — условия материальной жизни общества («реальный базис»). Надстройка относительно самостоятельна, иногда идеи опережали развитие.</li>
+<li><b>Второй фактор</b> — демографические, религиозные, общекультурные, этнические, национальные особенности, сословно-классовая структура.</li>
+<li>Внешние факторы: уровень общественной мысли, госполитика, прежняя управленческая мысль страны, мировая управленческая мысль → неизбежен <b>историко-сравнительный метод</b>.</li>
+</ol>
+<p>Недопустимы нигилизм и субъективизм. Схема исследования: фон (факторы) → личность автора (биография, сословие, практика) → формы мысли → оценка для прошлого, настоящего и будущего. К утопиям — бережно: они часто ценны позже.</p>
+<h3>Формализация</h3>
+<ul>
+<li>ИУМ = F(f₁(x), …, fₙ(x), t) — это <b>функционал</b>, потому что ИУМ зависит от зависимых переменных; x — вектор.</li>
+<li>ИУМ = A₁f₁(x)+…+Aₙfₙ(x)+at — <b>аналог модели Альтмана</b>; задача — найти коэффициенты Aᵢ (значимость факторов).</li>
+<li>«Математика — это не наука. Математика — это язык». Бизнес-среда = алгебраическая сумма внутренней и внешней среды.</li>
+<li><b>Маслоу</b> (1954, «Мотивация и личность»): учёные заменили причинность «функциональностью» связей, но проблемы причин остаются.</li>
+<li>Основной вопрос ИУМ: <b>«ПОЧЕМУ менялись взгляды на управление социальными объектами?»</b></li>
+</ul>
+<h3>Источники</h3>
+<ul>
+<li>Две группы: 1) отражающие хозяйственную деятельность (с <b>5 тыс. до н. э.</b>, эпоха меди и бронзы, иероглифы); 2) осмысляющие управление — лишь с <b>XVII–XVIII вв.</b> Трудов, целиком посвящённых управлению, до середины XIX в. нет; главный — Штейн (1860-е).</li>
+<li>Источниковедение — <b>наименее разработанная</b> методологическая проблема.</li>
+<li>Два режима исследователя: <b>внешний современный наблюдатель</b> (переоценка на языке современной науки) и <b>«погружение»</b> (реконструкция на языке прошлого). Оба нужны, но недостаточны; выводы часто двойственные; Маршев предпочитает второй (не в чистом виде). Критерий истины — практика управления того же и последующих периодов.</li>
+<li>До XX в. науки управления как отдельной не было — идеи искали в политэкономии, полицейском праве, социологии и т. д. Управление — онтологически самая <b>эклектичная</b> деятельность.</li>
+<li>Обратная связь: <b>Маркс</b>, 3-й т. «Капитала» — «плата за надзор» → с акционерными обществами появляется категория «оплата труда наемных управляющих».</li>
+</ul>
+<h3>Наука, обучение, консультирование</h3>
+<ul>
+<li>Первые курсы подготовки жрецов-управленцев — Месопотамия и Шумер (5 тыс. до н. э.); в XVIII в. их назвали камералистами.</li>
+<li>Первое высшее коммерческое училище в России — <b>Москва, 1772</b>; первая школа бизнеса в США — <b>1881</b>.</li>
+<li>До начала XIX в. творцы науки — практики и учёные, затем — <b>консультанты</b>: Эмерсон (принципы эффективности), Файоль (функции управления), Керженцев, Ерманский, Гастев (НОТ), BCG, McKinsey, Arthur D. Little (стратегия), Хаммер (реинжиниринг).</li>
+<li>Пара «наука — консультирование» <b>плодотворнее</b>, чем «наука — обучение», хотя без второй не было бы творцов.</li>
+</ul>
+</div>
+
+<div data-k="t17" data-n="§1.7 Основные течения">
+<h2>§1.7. Основные течения управленческой мысли с 5 тыс. до н. э. до начала XXI в.</h2>
+<ul>
+<li>Египет 20–5 тыс. лет до н. э.: охота с бумерангами, мотыга с кремнёвым наконечником — как минимум самоуправление.</li>
+<li>Самое веское доказательство <b>профессионального</b> управления — оросительные системы и пирамиды.</li>
+<li>Середина 4 тыс. до н. э. — сословия, первые государства в <b>номах</b>.</li>
+<li>Мысль развивалась 2–3 течениями: государственное, храмовое, частное хозяйство; утопии (Платон, Гипподам, Аристотель, Бэкон, Маркс).</li>
+<li>Критерии эффективности: сначала психологические, затем экономические, политические, социальные, правовые.</li>
+<li><b>Платон</b> — возможно, впервые в ИУМ обосновал <b>разделение труда</b>. <b>Хань Фэй-цзы</b> (сер. III в. до н. э.) — «претворять постоянство», недеяние правителя.</li>
+</ul>
+<h3>Три этапа госуправления (объект — хозяйство, субъект — государство)</h3>
+<div class="tw"><table><tr><th>Этап</th><th>Время</th><th>Суть</th></tr>
+<tr><td><b>Полицейское государство</b></td><td>до конца XVIII в.</td><td>Теория естественного права (Древний Китай) и эвдемонизм (Греция). πολιτεια — искусство управления хозяйством полисов. Мелочная регламентация («государство — это я», число ниток у ткачей). Индия: dandaniti — «искусство наказания». Россия: Крижанич, Котошихин, Посошков. Камералисты (camera — дворцовая казна); в России с 1840 по инициативе Лобачевского (Казань). Энгельс: «каша из всякой всячины…»</td></tr>
+<tr><td><b>Правовое государство</b></td><td>с конца XVIII в.</td><td>Против полицейского выступило третье сословие (буржуазия). Основы: Кант, Руссо (договор, обоснованный Гоббсом), Кенэ, Смит, Рикардо, Локк и Монтескье. «Полиция» сузилась до безопасности; появились «внутреннее управление», МВД. Берг, Вебер, Лотц, Молль; в России Сперанский, Рождественский, Платонов, Лешков. <b>Штейн</b> (1860-е) ввёл «учение об управлении» вместо «науки о полиции».</td></tr>
+<tr><td><b>Культурное государство</b></td><td>последняя четверть XIX в.</td><td>Правовое государство «обмануло ожидания». <b>Гольцев</b>, Левитский, Гумплович: государство берёт задачи благосостояния, сохраняя права личности. Основа — исторические школы политэкономии и права.</td></tr></table></div>
+<ul>
+<li>Конец XIX в.: Ивановский, Бартелеми — функции; Инама-Штернег, Персико — методы; Гумплович, Ваккелли — социология и психология. <b>Бартелеми</b>: функции обязательные («существенные»: военное, судебное, полицейское, финансовое) и факультативные. <b>Ваккелли</b> — «административная психология». <b>Персико</b> (1890) — система учения из 4 частей. <b>Де-Бернардо</b> — социологический взгляд.</li>
+<li>Прикладные темы: подготовка кадров и мотивация, централизация/децентрализация.</li>
+</ul>
+<h3>Частное хозяйство и производство</h3>
+<ul>
+<li><b>Бэббидж</b>, «Экономика машин и мануфактур» (1832), 10 лет наблюдений — пионер научного исследования управления.</li>
+<li><b>Юр</b>, «Философия производства» (1835): «заменить ручное производство механической наукой».</li>
+<li>1850-е — «американская система производства», центр исследований переходит в США. <b>Генри Таун</b> «Инженер как экономист» (1886). <b>Эмерсон</b> — «инженер по эффективности», против громоздких организаций.</li>
+<li>Россия: Александровская мануфактура (СПб) — первая фабрика, минуя мануфактуру; фабрик с 1710 по 1861 — со 150 до 14 148 (почти в 100 раз); при Петре I фабрика — почти госслужба. <b>Иван Тиме</b> «Основы машиностроения» (1883–1885).</li>
+<li>Итог к концу XIX в.: мозаичные идеи → «одномерные учения» → «синтетические учения».</li>
+</ul>
+<h3>XX век</h3>
+<ul>
+<li><b>Тейлор</b> — научный менеджмент; научность — в методах наблюдения и измерения. Главный недостаток — <b>не хватало человека</b>.</li>
+<li><b>Файоль (1916)</b>: функции — прогнозирование, планирование, организация, руководство, координация, контроль. Похожее у <b>Ивановского (1883)</b>, но для госуправления.</li>
+<li><b>Школа человеческих отношений</b> (1920-е, Мэйо, Ротлисбергер): производительность зависит от социально-психологических факторов; менеджмент — «видимая рука». К триаде «знания–умения–навыки» добавили «волю менеджера».</li>
+<li>1940–60-е — <b>системный подход</b>, синтетические учения: социальные и социотехнические системы, новая школа, исследование операций, ситуационный подход.</li>
+</ul>
+</div>
+
+<div data-k="t21" data-n="§2.1 Истоки и источники">
+<h2>§2.1. Истоки и источники управленческой мысли</h2>
+<p class="muted">Эпиграф — Дж. С. Милль, «Основы политической экономии», 1848.</p>
+<ul>
+<li>Первобытное «присваивающее» хозяйство, доклассовое общество. Найденные материальные факты подтверждают организованные коллективные действия.</li>
+<li><b>6 признаков цивилизации</b>: производящее хозяйство; частная собственность; письменность; государство и право; город; крупномасштабные строительные работы.</li>
+<li>Первые классовые общества — долины Нила, Тигра и Евфрата, вторая половина 4 тыс. до н. э.</li>
+</ul>
+<h3>Два пути образования классов</h3>
+<div class="tw"><table><tr><th>Путь</th><th>Что первично</th><th>Страны</th></tr>
+<tr><td>Азиатский способ производства</td><td>Монополизация общественных функций; собственность вторична</td><td>Месопотамия, Египет, Передняя Азия, Индия, Китай</td></tr>
+<tr><td>Античный способ производства</td><td>Частное производство и собственность семей</td><td>Древний Рим, Древняя Греция</td></tr></table></div>
+<ul>
+<li>Государственное хозяйство породило функции: <b>планирование, организация, координация, мотивация, учёт, контроль</b>; идею страховых фондов (амбарная система Китая).</li>
+<li>До 5 тыс. до н. э. — устная передача знаний. Ирокезский род: старейшина мирного времени, военный вождь, совет сахемов. Греческий род: архонт, басилей, казначей, совет старейшин. Табл. 2.1: род → фратрия → племя. Энгельс: «Без солдат, жандармов… всё идёт своим порядком».</li>
+<li>Две причины появления трактатов: необходимость централизованного управления (ирригация) и потребность в усилении центральной власти (войны, объединение, классовая борьба).</li>
+<li>Документы, <b>осмысляющие</b> управление, появились позже: управление уникально и узкопрагматично, нужно время и подготовка; административно-правовые документы были в приоритете.</li>
+</ul>
+<h3>Древний Египет и Передняя Азия</h3>
+<ul>
+<li>Мифологическое, символичное мировоззрение, божественное происхождение власти → <b>поучительный, догматический, государственно-нормативный</b> характер текстов.</li>
+<li>Хаммурапи: «пастырь, избранный богом Энлилем… дракон среди царей».</li>
+<li>Аменемхет III (вторая половина XIX в. до н. э.) — храм «Лабиринт» не менее чем на 3000 богов.</li>
+<li>«Поучения Гераклеопольского царя сыну Мерикара» (XXII в. до н. э.), «Поучения Ахтоя… сыну Пиопи» (XXI в.), «Речения Ипусера» (XVIII в.).</li>
+<li>Надписи гробницы <b>Мечена</b> (XXVIII в. до н. э.) — перечень должностей. <b>«Надпись Уны»</b> (XXV в.) — визир, казначеи; правитель области дважды в год учитывает казённое имущество. <b>«Предписание о служебных обязанностях верховного сановника»</b> (XV в., Новое царство) — должностные обязанности визира. <b>Артхашастра</b> (IV в. до н. э.) — первая табель о рангах, 17 должностей.</li>
+<li>Школы — «дома учения писанию»; надзиратель — «владеющий хлыстом».</li>
+<li>Календарь — к концу V тыс. Два царства: юг «нисут» (белая корона), север «бисти» (красная), вместе — «псхент». Палермский камень (списки до V династии), Туринский папирус.</li>
+<li>Три времени года: наводнение (сен.–дек.), посев/зима (янв.–апр.), жатва/лето. Нил поднимается ~на 5 м; нехватка 1 м — голод.</li>
+<li>Египет — <b>родина бюрократической абсолютной монархии</b>. Древнее царство — с третьей династии (около XXX в. до н. э.). Амасис: каждый ежегодно объявляет доход, иначе смертная казнь.</li>
+</ul>
+</div>
+
+<div data-k="t23" data-n="§2.3 Древний Китай">
+<h2>§2.3. Разработка проблем управления в Древнем Китае</h2>
+<ul>
+<li>Особенность китайской мысли — <b>демифологичность и рациональность</b>; в центре — общество, этика, государство.</li>
+<li>Цивилизация — около XIV в. до н. э. Источники: надписи на бронзовых сосудах, летописи «Чуньцю», «Цзочжуань», «Гоюй», трактаты «Мэнцзы», «Моцзы», «Чжоули», «Гуаньцзы».</li>
+<li>Ключевые идеи — <b>VI–III вв. до н. э.</b>: эпоха Чжаньго («Борющихся царств»). 7 царств: Чу, Цинь, Чжао, Ци, Вэй, Янь, Хань; ~20 млн человек. <b>221 г. до н. э.</b> — объединение в империю Цинь.</li>
+<li>Западное Чжоу (XI–VIII вв.): ван → чжухоу → дафу → ши → простолюдины (+ бесправные).</li>
+<li>Поземельный налог: впервые царство Лу (594 г. до н. э.), Чу (548), Чжэн (543), последним Цинь (408) — по Сыма Цяню.</li>
+</ul>
+<h3>Мыслители</h3>
+<div class="tw"><table><tr><th>Кто</th><th>Годы</th><th>Главное</th></tr>
+<tr><td><b>Конфуций</b></td><td class="d">551–479</td><td>«Лунь Юй» (перевод П. С. Попова, 1910). Государство — большая семья; управление через ритуал «ли»; цзюнь-цзы управляют, сяо-жэнь управляемы. Добродетели: ли, жэнь, ту, сяо, чжун. Закон «фа» — вспомогательный. «Мораль благородного — ветер, низкого — трава». Без <b>доверия</b> нет государства. «Не спеши с решениями, не перегружайся мелочами».</td></tr>
+<tr><td><b>Лао-цзы</b></td><td></td><td>«Дао дэ цзин»: дао — естественная закономерность; недеяние государя; возврат к патриархальной простоте.</td></tr>
+<tr><td><b>Мо-цзы</b></td><td class="d">479–400</td><td>«Всеобщая любовь и взаимная выгода»; равенство; <b>договорное происхождение</b> государства (как Гоббс, Руссо); «сын неба»; критерий — благо народа; администратору нужны престиж (уважение), оклад (доверие), полномочия (страх); жёсткая структура с доносами.</td></tr>
+<tr><td><b>Мэн-цзы</b></td><td class="d">372–289</td><td>«Тот, кто напрягает свой ум, управляет людьми… Таков всеобщий закон Поднебесной».</td></tr>
+<tr><td><b>Шан Ян</b></td><td class="d">390–338</td><td>«Книга правителя области Шан». Легизм: «Закон — выражение любви к народу»; «мудрый творит законы, глупый ограничен ими». Полицейское государство, жёсткие законы, наказания важнее наград, круговая порука (пятки и десятки). <b>Сосредоточение на Едином</b> (земледелие и оборона): 1 год → могущество 10 лет, 10 → 100, 100 → 1000.</td></tr>
+<tr><td><b>Шэнь Пу-хай</b></td><td class="d">400–337</td><td>Министр царства Хань, теоретик <b>«шу»</b> — искусства управления. «Правитель — тело, чиновники — руки». Скрытность, недеяние. «Никогда не отдавайте невыполнимых приказов!» Отбор: способности, прошлые достижения, старшинство — против протекции. Система <b>син-мин</b>.</td></tr>
+<tr><td><b>Гуаньцзы</b> (трактат)</td><td>IV–II вв.</td><td>В честь Гуань Чжуна (VII в.). Идея <b>цин-чжун</b> («лёгкое–тяжёлое») — балансирование хозяйства. <b>Ли Куй</b>: госзакупки зерна в урожайные годы и продажа в неурожайные (как библейский Иосиф; сейчас — «государственная интервенция зерна»). «Земля — основа системы управления». Гл. 48: «<b>сначала сделай народ богатым, а потом управляй им</b>».</td></tr>
+<tr><td><b>Сюнь-цзы</b></td><td class="d">313–238</td><td>Последний чжоуский конфуцианец; синтез учений. Человек по натуре <b>порочен</b> → воспитание. «Правитель — лодка, народ — волна». Первый министр — <b>сян</b>. Законы — для народа, ритуал и долг — для верхов.</td></tr>
+<tr><td><b>Хань Фэй-цзы</b></td><td class="d">ок. 288–233</td><td>См. ниже.</td></tr></table></div>
+<h3>Хань Фэй-цзы</h3>
+<ul>
+<li>Из знатного рода царства Хань; учился у Сюнь-цзы вместе с Ли Сы; влияние Лао-цзы; был заикой, но писал прекрасно. Трактат: 20 глав, 55 параграфов, ~340 стр. в переводе А. И. Иванова (1912). Цинь Ши-хуан хотел с ним встретиться; по ложному доносу погиб в тюрьме.</li>
+<li>Управление — система на <b>законах</b> и <b>власти</b> правителя. Государство возникло из-за роста населения и споров.</li>
+<li>Этические нормы конфуцианцев — как «детская игра в приготовление пищи из песка».</li>
+<li><b>Законы меняются со временем</b>: «если система управления не меняется с течением времени, возникает смута». Обязательность закона ≠ его вечность (вопрос с лекции).</li>
+<li>«Благосостояние приносят труд и бережливость»; «Кто возлагает надежду на духов, тот пренебрегает законом». Бедность — от лени и расточительности.</li>
+<li><b>Закон</b> записан и объявлен народу; <b>искусство управления</b> скрыто в сердце правителя. Шэнь Бу-хай — искусство, Шан Ян (Гун Сунь-Ян) — законы; нужны оба как «орудия власти».</li>
+<li>Закон вводят, если пользы больше вреда: «нет законов без недостатков, пользы без вреда».</li>
+<li>Расхождения с Шан Яном: учение о законах несовершенно; Шан Ян молчал об искусстве управления и был за ответственный кабинет министров, а Хань Фэй — за <b>абсолютную монархию</b>.</li>
+<li>«Государство — колесница, положение — лошадь». Власть — «когти и зубы тигра».</li>
+<li>8 принципов: не уступать власть; заставлять следить друг за другом; быть скрытным; считать всех дурными; не считаться с моралью; одурманивать народ; в наказаниях строгость, в поощрениях умеренность; при необходимости неразборчивость в средствах. «Обилие наград — основание смуты».</li>
+<li>Персонал: брать по способностям без учёта происхождения. Два взгляда на чиновников: <b>орудие</b> («ворон с подрезанными крыльями») и <b>покупатель–продавец</b> («продают силы и жизнь за титулы и жалованье») — новый взгляд.</li>
+<li>Наказание за <b>несоответствие слов делу</b> — и когда сделано меньше, и когда больше обещанного. Нельзя совмещать должности и вмешиваться в чужие дела.</li>
+<li>Предложения вану Хань (отвергнуты): избавиться от бездарных, реформировать службу, усилить наказания.</li>
+</ul>
+<ul><li>«Спор о соли и железе» (81 г. до н. э.): легист Сан Хун-ян против конфуцианцев; единый контроль над солью и железом.</li>
+<li>Факторы развития китайской мысли: политические, экономические, научно-технологические, общекультурные.</li></ul>
+</div>
+
+<div data-k="t41" data-n="§4.1 Россия IX–XVIII вв.">
+<h2>§4.1. Источники и истоки управленческой мысли в России</h2>
+<p class="muted">Эпиграф: «Не стреляйте в Прошлое из пистолета, иначе Будущее выстрелит из пушки».</p>
+<h3>Источники</h3>
+<ul>
+<li>До летописей — записи иностранцев: патриарх Фотий (IX в.), Константин Багрянородный и Лев Диакон (X в.), саги, арабы (Ибн-Хордадбе, Ибн-Фадлан, Ибн-Даста, Масуди). Константин VII «Об управлении империей» — о росах с моноксилами, путь «из варяг в греки». Ключевский: «отдельные подробности, не складывающиеся ни во что цельное».</li>
+<li>Летописи и своды XII–XIV вв. Сначала вело духовенство, затем княжеские дворы, в Москве — приказные дьяки. Списки: Лаврентьевский (1377), Ипатьевский (конец XIV — нач. XV), Московский (XVI), Никоновский (XVI–XVII). Археологическая комиссия — 1834; ПСРЛ издаётся с 1841.</li>
+<li>Удельный период (XIII–XIV вв.): «князья-собиратели» — те, кто лучше хозяйничал. Галицко-Волынская летопись (до 1292): Даниил Галицкий, основание Львова, покровительство ремеслу.</li>
+<li>Другие источники: Русская Правда, уставы и уставные грамоты, Судные грамоты, акты Земских соборов, торговые договоры, «Поучение» Мономаха, обряды и игры («сеять просо», «ткать»).</li>
+<li>Уставы 1-й группы: Устав Владимира о десятинах; Устав Ярослава о церковных судах. 2-й группы (XII–XIV вв.): грамоты Ростислава и епископа Мануила (1136–1150, Смоленск), грамота Святослава Ольговича (1137, Новгород), <b>Устав церкви Ивана на Опоках</b> — Иванская купеческая корпорация, возможно первая предпринимательская организация: «пошлые» (исконные) купцы, 2 старосты от купцов + 1 от житьих и чёрных людей, взнос 50 гривен серебра (~10 кг), половина — в церковь, эталон весов, вощаная пошлина, бояре не вмешиваются.</li>
+<li>Уставная грамота Мстислава Даниловича (около 1289); «Устав князя Ярослава о мостех» (Новгород).</li>
+<li>Централизация: начата при Иване Калите (1325–1340), завершена при Иване IV (1530–1584), активнее всего — при Иване III (1462–1505). Судебники 1497 и 1550, Стоглав 1551.</li>
+</ul>
+<h3>Хозяйство и государство</h3>
+<ul>
+<li>Основное занятие — земледелие; железо — в «домницах». Ключевский: «Лесной зверолов и бортник — самый ранний тип».</li>
+<li>Волостные города-государства IX–XII вв.: Киев, Чернигов, Переяславль, Смоленск, Владимир. Торговля с арабами по Волге (VIII–X вв.), с IX в. — путь «из варяг в греки».</li>
+<li>Киев — первый крупный центр; к началу IX в. Киевское государство. Русь перешла от первобытнообщинного строя к феодальному, <b>минуя рабовладельческий</b>. Из Византии вместе с христианством пришла модель <b>полицейского государства</b>.</li>
+<li>Налоги: <b>повоз</b> (привоз в Киев) и <b>полюдье</b> (объезд князем). Лодки-однодеревки, сбор у Витичева.</li>
+<li>Аналог ирригации на Руси — <b>охрана торговых путей, оборона степных границ, строительство городов</b>. Владимир: «Худо, что мало городов вокруг Киева». Титмар — около 400 церквей и 8 рынков; пожар 1017 — 700 церквей.</li>
+<li>Договоры с греками: 2 — Олега, по одному — Игоря и Святослава. Торговый съезд 6 месяцев, монастырь св. Маманта, месячина по старшинству городов, по договору Олега — без пошлины; по договору Игоря — нельзя зимовать. Меха, мёд, воск, челядь ↔ паволоки, золото, вина, овощи.</li>
+</ul>
+<h3>Структура власти</h3>
+<ul>
+<li><b>Десятичная система</b> (из военной организации): тысяча, сотни, десятки; тысяцкий; «старцы градские». Дружина: старшая (бояре) и младшая (детские, отроки). Христианство принято по совету с боярами и старцами.</li>
+<li>Дворский (дворецкий) — первое лицо финансового управления; тиуны, ключники, посельские. Наместники (города), волостели (волости) — <b>кормление</b>. В X в. — <b>дворцово-вотчинная система</b>.</li>
+<li>Ярослав, сидя в Новгороде, платил отцу 2000 гривен в год — и перестал. Завещал престол <b>трём старшим</b> сыновьям — основа местничества.</li>
+<li><b>Подвижной очередной порядок</b>: генеалогическая лестница князей соответствует лестнице волостей; великий князь — «названный отец». Причина: самые угрожаемые области (у степи) были и самыми богатыми, оборону нёс старший.</li>
+<li>Князья — временщики, «речные викинги»: оборона — их обязанность, корм — их право. Изяслава изгоняли дважды.</li>
+<li><b>Любечский съезд 1097</b> (инициатива Святополка II): «каждый пусть управляет своей вотчиной».</li>
+<li>Новгород и Псков — феодальные республики: вече, оспода (совет господ), влияние владыки.</li>
+<li>Упадок Киева — со второй половины XI в.; к середине XII в. — раздробленность.</li>
+<li><b>Русская Правда</b> — свод правовых основ госуправления; аналог Салической, Рипуарской, Бургундской правды.</li>
+</ul>
+</div>
+
+<div data-k="tdates" data-n="Даты">
+<h2>Хронология</h2>
+<div class="tw"><table><tr><th>Когда</th><th>Что</th></tr>
+<tr><td class="d">20–5 тыс. до н. э.</td><td>Земледельческие общины Египта; устная передача знаний</td></tr>
+<tr><td class="d">5 тыс. до н. э.</td><td>Первые хозяйственные документы (иероглифы); курсы жрецов в Шумере</td></tr>
+<tr><td class="d">кон. V тыс.</td><td>Египетский календарь</td></tr>
+<tr><td class="d">сер. 4 тыс.</td><td>Первые государства в номах Египта</td></tr>
+<tr><td class="d">XXX в. до н. э.</td><td>Древнее царство (с третьей династии)</td></tr>
+<tr><td class="d">XXVIII в.</td><td>Надписи гробницы Мечена</td></tr>
+<tr><td class="d">XXV в.</td><td>«Надпись Уны»</td></tr>
+<tr><td class="d">XXII в.</td><td>Поучения царя сыну Мерикара</td></tr>
+<tr><td class="d">XXI в.</td><td>Поучения Ахтоя сыну Пиопи</td></tr>
+<tr><td class="d">XIX в. до н. э.</td><td>Аменемхет III, «Лабиринт»</td></tr>
+<tr><td class="d">XVIII в.</td><td>«Речения Ипусера»</td></tr>
+<tr><td class="d">XV в. до н. э.</td><td>«Предписание о служебных обязанностях верховного сановника»</td></tr>
+<tr><td class="d">XIV в. до н. э.</td><td>Складывается древнекитайская цивилизация</td></tr>
+<tr><td class="d">XI в. до н. э.</td><td>«Вавилонская теодиция»</td></tr>
+<tr><td class="d">VI–III вв. до н. э.</td><td>Чжаньго, расцвет китайской мысли</td></tr>
+<tr><td class="d">594 г. до н. э.</td><td>Первый поземельный налог (царство Лу)</td></tr>
+<tr><td class="d">551–479</td><td>Конфуций</td></tr>
+<tr><td class="d">IV в. до н. э.</td><td>Артхашастра (17 должностей); «Книга правителя области Шан»</td></tr>
+<tr><td class="d">221 г. до н. э.</td><td>Объединение Китая в империю Цинь</td></tr>
+<tr><td class="d">II в. до н. э.</td><td>Полибий — «цикличность»</td></tr>
+<tr><td class="d">81 г. до н. э.</td><td>«Спор о соли и железе»</td></tr>
+<tr><td class="d">IX в.</td><td>Киевское государство; путь «из варяг в греки»</td></tr>
+<tr><td class="d">1017</td><td>Пожар в Киеве — 700 церквей</td></tr>
+<tr><td class="d">1054</td><td>Смерть Ярослава, конец единовластия</td></tr>
+<tr><td class="d">1097</td><td>Любечский съезд</td></tr>
+<tr><td class="d">1137</td><td>Грамота Святослава Ольговича (Новгород)</td></tr>
+<tr><td class="d">1292</td><td>Конец Галицко-Волынской летописи</td></tr>
+<tr><td class="d">1325–1340</td><td>Иван Калита — начало централизации</td></tr>
+<tr><td class="d">1377</td><td>Лаврентьевский список</td></tr>
+<tr><td class="d">1462–1505</td><td>Иван III</td></tr>
+<tr><td class="d">1497 / 1550 / 1551</td><td>Судебники, Стоглав</td></tr>
+<tr><td class="d">1710 → 1861</td><td>Фабрик в России: 150 → 14 148</td></tr>
+<tr><td class="d">1772</td><td>Первое высшее коммерческое училище (Москва)</td></tr>
+<tr><td class="d">1832</td><td>Бэббидж «Экономика машин и мануфактур»</td></tr>
+<tr><td class="d">1834 / 1841</td><td>Археологическая комиссия / начало ПСРЛ</td></tr>
+<tr><td class="d">1835</td><td>Юр «Философия производства»</td></tr>
+<tr><td class="d">1840</td><td>Камералисты в России (Лобачевский, Казань)</td></tr>
+<tr><td class="d">1848</td><td>Милль «Основы политической экономии»</td></tr>
+<tr><td class="d">1860-е</td><td>Штейн, 7 томов «Учения об управлении»</td></tr>
+<tr><td class="d">1881</td><td>Тейлор — чемпион по теннису; Гольцев читает курс; первая школа бизнеса в США</td></tr>
+<tr><td class="d">1883</td><td>Ивановский — функции госуправления</td></tr>
+<tr><td class="d">1883–1885</td><td>Тиме «Основы машиностроения»</td></tr>
+<tr><td class="d">1886</td><td>Генри Таун «Инженер как экономист»</td></tr>
+<tr><td class="d">1890</td><td>Персико — система учения из 4 частей</td></tr>
+<tr><td class="d">1911</td><td>«Принципы научного управления» Тейлора изданы в России</td></tr>
+<tr><td class="d">1912</td><td>Перевод Хань Фэй-цзы (А. И. Иванов)</td></tr>
+<tr><td class="d">1916</td><td>Файоль — функции управления, 6 групп операций</td></tr>
+<tr><td class="d">1919 / 1946</td><td>Шпенглер / Тойнби</td></tr>
+<tr><td class="d">1921 → 1927</td><td>Доля Ford: 56% → 10%</td></tr>
+<tr><td class="d">1940</td><td>Начало ежегодных конгрессов Академии менеджмента</td></tr>
+<tr><td class="d">1954</td><td>Маслоу «Мотивация и личность»</td></tr>
+<tr><td class="d">1965</td><td>Алмаз Ливитта; Старосьцяк «Элементы науки управления»</td></tr>
+<tr><td class="d">кон. 1960-х</td><td>Начало целенаправленных ИУИ (Клод Джордж)</td></tr>
+<tr><td class="d">1985 / 1987 / 1988</td><td>Определения ИУ и ИУМ / автореферат / классификация Маршева</td></tr>
+<tr><td class="d">1996</td><td>Конференции по ИУМ в МГУ</td></tr>
+<tr><td class="d">2001</td><td>Cisco (апрель), Enron (декабрь)</td></tr>
+<tr><td class="d">2008</td><td>Конгресс АОМ в Анахайме; кризис</td></tr>
+<tr><td class="d">2017</td><td>Diversity of HR (Apple)</td></tr>
+<tr><td class="d">2018</td><td>78-й конгресс АОМ (Чикаго); «яма» 33,9 млн в РФ</td></tr>
+<tr><td class="d">2019</td><td>79-й конгресс АОМ (Бостон)</td></tr>
+<tr><td class="d">2020</td><td>Банкротство Hertz; доклад ВЭФ</td></tr>
+</table></div>
+</div>
+
+<div data-k="tpeople" data-n="Кто есть кто">
+<h2>Кто есть кто: персоны и цитаты</h2>
+<div class="tw"><table><tr><th>Кто</th><th>Чем запомнить</th></tr>
+<tr><td>Минцберг</td><td>«Общество организаций»; «Managers Not MBA’s»; десять школ стратегий</td></tr>
+<tr><td>Ливитт</td><td>Алмаз (1965): персонал, структура, задачи, технология</td></tr>
+<tr><td>Барнард</td><td>Кооперация: сознательность, предсказуемость, целенаправленность</td></tr>
+<tr><td>Марч и Саймон</td><td>Люди — механизмы принятия решений</td></tr>
+<tr><td>Эдит Пенроуз</td><td>Критика биологических аналогий</td></tr>
+<tr><td>Лоуренс Питер</td><td>Уровень некомпетентности</td></tr>
+<tr><td>П. Сорокин</td><td>Изменения идут из внутренней среды</td></tr>
+<tr><td>Семлер</td><td>«Избавиться от менеджеров»</td></tr>
+<tr><td>Клод Джордж</td><td>Начало целенаправленных ИУИ (кон. 1960-х)</td></tr>
+<tr><td>Клаузевиц</td><td>«О войне» — основа трёх способов использования истории</td></tr>
+<tr><td>Лоренц фон Штейн</td><td>«Учение об управлении», 7 томов, 1860-е</td></tr>
+<tr><td>В. Гольцев</td><td>Курс 1881 г.; культурное государство</td></tr>
+<tr><td>Ежи Старосьцяк</td><td>Нет рецептов — ищем закономерности (1965)</td></tr>
+<tr><td>Маслоу</td><td>Причинность vs функциональность (1954)</td></tr>
+<tr><td>Маркс</td><td>«Оплата труда наемных управляющих»</td></tr>
+<tr><td>Энгельс</td><td>Камералистика — «каша из всякой всячины»</td></tr>
+<tr><td>Бартелеми</td><td>Обязательные и факультативные функции</td></tr>
+<tr><td>Ваккелли</td><td>Административная психология</td></tr>
+<tr><td>Бэббидж / Юр</td><td>1832 / 1835</td></tr>
+<tr><td>Эмерсон</td><td>«Инженер по эффективности»</td></tr>
+<tr><td>Иван Тиме</td><td>«Основы машиностроения» (1883–1885)</td></tr>
+<tr><td>Файоль</td><td>1916: функции управления; «ввести в преподавание предвидение»</td></tr>
+<tr><td>Ивановский</td><td>1883: функции госуправления</td></tr>
+<tr><td>Мэйо, Ротлисбергер</td><td>Школа человеческих отношений</td></tr>
+<tr><td>Хаммурапи</td><td>«Пастырь, избранный богом Энлилем»</td></tr>
+<tr><td>Амасис</td><td>Ежегодная декларация доходов</td></tr>
+<tr><td>Конфуций</td><td>Ли, доверие, ветер и трава</td></tr>
+<tr><td>Мо-цзы</td><td>Всеобщая любовь, договор</td></tr>
+<tr><td>Шан Ян</td><td>Законы, Единое, круговая порука</td></tr>
+<tr><td>Шэнь Пу-хай</td><td>Шу, син-мин, невыполнимые приказы</td></tr>
+<tr><td>Ли Куй</td><td>Регулирование цен на зерно</td></tr>
+<tr><td>Сюнь-цзы</td><td>Человек порочен; лодка и волна</td></tr>
+<tr><td>Хань Фэй-цзы</td><td>Закон + искусство + власть; законы меняются со временем</td></tr>
+<tr><td>Ключевский</td><td>Зверолов и бортник; дворцово-вотчинная система</td></tr>
+<tr><td>Константин Багрянородный</td><td>«Об управлении империей»; «О народах» (полюдье)</td></tr>
+<tr><td>Даниил Галицкий</td><td>Львов, покровитель ремёсел</td></tr>
+</table></div>
+</div>
+</div>
+
+<script>
+/* ===================== ВОПРОСЫ =====================
+   o[0] — всегда правильный вариант; варианты перемешиваются при показе.
+   t — разделы: s12 s14 s16 s17 s21 s23 s41, dates, people, lec */
+const QS=[
+/* ---------- В СТИЛЕ ЛЕКЦИИ (6 вариантов) ---------- */
+{t:"s14 lec",q:"Достоверный исторический факт показывает, что определённый управленческий приём однажды дал результат. Студент использует этот факт как доказательство: «значит, приём обязательно работает при любых условиях». Как правильно ограничить такой вывод?",o:[
+"Факт подтверждает возможность действенности приёма; универсальное утверждение требует отдельной теоретической проверки.",
+"Факт не может подтверждать даже возможность действенности: историю можно использовать только для иллюстраций.",
+"Факт подтверждает универсальность автоматически: правдоподобие события у автора равнозначно непротиворечивости любой теории о нём.",
+"Факт подтверждает универсальность после удаления подробностей: условия события мешают теоретической проверке.",
+"Факт следует считать историческим предсказанием только потому, что событие произошло раньше исследователя.",
+"Факт подтверждает возможность даже при недостоверности: для исторического доказательства автор требует лишь яркости примера."],
+e:"Маршев различает исторический образец, историческое доказательство и историческое предсказание. Достоверный факт доказывает, что приём оказался действенным хотя бы в определённых условиях. Обязательную эффективность «всегда и везде» из единичного случая не вывести: нужна теоретическая проверка и учёт контекста."},
+{t:"s23 lec",q:"Как совместить требование Хань Фэй-цзы неукоснительно исполнять законы с его предупреждением о смуте при неизменной системе управления?",o:[
+"Следует исполнять законы и менять их сообразно времени: обязательность закона не означает вечной пригодности прежних установлений.",
+"Следует сохранять древние запреты без изменений: смута возникает только от изменения законов.",
+"Следует отказаться от законов: изменение обстоятельств делает управление на правовой основе невозможным.",
+"Следует заменить законы верой в духов: она согласует старые правила с новыми условиями.",
+"Следует менять только название системы: содержание запретительных мер не зависит от времени.",
+"Следует предоставить каждому чиновнику выбор, соблюдать закон или нет: личное усмотрение — основа порядка."],
+e:"Хань Фэй считал законы основой порядка и требовал их исполнения. Но он же писал: «Коль скоро закон изменяется соответственно времени, тогда царит порядок… Если система управления не меняется с течением времени, возникает смута». Вера в духов, по Хань Фэю, — пренебрежение законом."},
+{t:"s14 lec",q:"Исследователь восстанавливает в мельчайших деталях условия эпохи и, опираясь на теоретическую схему, логически непротиворечиво показывает, что известный результат был необходимым итогом процесса. Как Маршев называет такое использование исторического опыта?",o:[
+"Историческое предсказание: опыт развёрнут подробно и проверяет непротиворечивость теоретической концепции.",
+"Исторический образец: подробности нужны лишь для того, чтобы оживить абстрактную теорию.",
+"Историческое доказательство: для него достаточно указать на один достоверный факт.",
+"Прогноз будущего: «предсказание» у Маршева касается только событий, которые ещё не произошли.",
+"Историография: любой подробный разбор факта автоматически становится обзором источников.",
+"Управленческий эксперимент в чистом виде: прошлое можно повторить в лаборатории."],
+e:"Историческое предсказание — третий, самый важный для науки способ. Исследователь знает свершившийся факт и «предсказывает» его как необходимый итог. Название оправдано ещё и тем, что проверенная так концепция затем годится для предвидения."},
+{t:"s14 lec",q:"Лектор упоминает Генри Форда и его «чёрный автомобиль» одной фразой, только чтобы оживить мысль об управленческой инерции. Каким способом здесь использован исторический факт?",o:[
+"Исторический образец: факт служит иллюстрацией, достаточно его упоминания.",
+"Историческое доказательство: упоминание доказывает, что инерция неизбежна в любой компании.",
+"Историческое предсказание: короткое упоминание проверяет непротиворечивость теории.",
+"Управленческий эксперимент: любой известный случай уже является научно обработанной практикой.",
+"Историография: упоминание случая — это критический обзор источников.",
+"Источниковедение: факт превращается в источник, если его назвать на лекции."],
+e:"Первый случай по Маршеву — иллюстрация, пояснение научной мысли. Такой опыт он называет историческим образцом, и для него обычно достаточно лишь упоминания факта."},
+{t:"s14 lec",q:"Почему, по Маршеву, историко-управленческий материал может выполнять в науке управления роль эксперимента?",o:[
+"Многократные управленческие эксперименты почти невозможны, а «многократность» обеспечивается тем, что управление постоянно воспроизводится во все времена.",
+"Потому что любой факт прошлого уже является готовым экспериментом и обработки не требует.",
+"Потому что в прошлом условия были одинаковыми, а значит, результаты можно переносить без поправок.",
+"Потому что историки управления первыми научились проводить лабораторные эксперименты над организациями.",
+"Потому что в науке управления проверка гипотез давно налажена и история нужна лишь для красоты изложения.",
+"Потому что исторический материал не зависит от места и времени, то есть наука управления номографична."],
+e:"Главная методологическая причина «многоликости» науки — отсутствие налаженных процедур проверки гипотез. Выход: рассматривать реальный жизненный процесс как материал для эксперимента. Многократность даёт свойство управления постоянно воспроизводиться и изучение фактов разных периодов."},
+{t:"s14 lec",q:"Студент утверждает: «Вся общественная практика прошлого — это управленческий эксперимент». Как поправить его по Маршеву?",o:[
+"Не всякая практика — эксперимент: эксперимент — это целенаправленно отобранная и научно обработанная часть практики, как «информация» по отношению к «данным».",
+"Студент прав: практика и эксперимент тождественны, различие только в названии.",
+"Эксперимент — это только то, что проведено в лаборатории, поэтому прошлое к эксперименту отношения не имеет.",
+"Экспериментом становится любая практика, о которой сохранился хотя бы один документ.",
+"Экспериментом считается только практика XX века, когда появилась наука управления.",
+"Эксперимент — это «наследство», а практика — «наследие»."],
+e:"Маршев не отождествляет общественную практику и управленческий эксперимент. Соотношение как «данные — информация» или «наследство — наследие»: всякий эксперимент — отобранная и научно обработанная часть практики, но не наоборот."},
+{t:"s12 lec",q:"Плачущий ребёнок добился покупки игрушки: его слёзы изменили поведение родителей. Почему Маршев не считает это управлением как профессиональной деятельностью?",o:[
+"У такого воздействия нет одновременно права (правомочности) и ответственности за последствия и последействия решения.",
+"Потому что воздействие не изменило поведение родителей.",
+"Потому что ребёнок не является «лицом» и не может воздействовать на других.",
+"Потому что в нём нет осмысленности, а это единственный признак профессионального управления.",
+"Потому что профессиональное управление всегда системно, а без системности воздействие не меняет поведения.",
+"Потому что любое воздействие внутри семьи — это организация как процесс, а не управление."],
+e:"Пример плачущего ребёнка — управление как общечеловеческая деятельность. Принципиальное отличие профессионального управления — одновременное наличие права (полномочий) и ответственности за последствия и последействия. «Системное» — скорее желательный атрибут."},
+{t:"s12 lec",q:"Компания чётко сформулировала цель B и разработала стратегию C, но так и не достигла цели. Где, по Маршеву, чаще всего кроется первопричина?",o:[
+"В ответе на вопрос A: неправильный анализ и диагностика текущего состояния бизнес-среды обманчиво простой первой задачи.",
+"Только в слишком амбициозной цели B: будущее сформулировать сложнее всего.",
+"Только в выборе траектории C: диагностика настоящего на результат не влияет.",
+"В том, что компания вообще ставила цель: цели мешают адаптироваться.",
+"В инерционности рынка: менеджеры здесь ни при чём.",
+"В отсутствии цифровизации: без неё ни одна стратегия не работает."],
+e:"Кажущаяся простота первой задачи (точка A) обманчива. Анализ исторического опыта показывает: из-за неверной оценки текущего состояния бизнес-среды стратегии не приводят к цели B. Поэтому решение задачи A «ответственнее», прежде всего морально."},
+{t:"s12 lec",q:"Почему в определении Маршева люди исключены из списка ресурсов организации?",o:[
+"Люди — единственные элементы организации как системы; всё остальное (финансы, сырьё, информация, время) — ресурсы и средства достижения целей.",
+"Потому что люди слишком дороги, чтобы считать их ресурсом.",
+"Потому что людей учитывают в элементе «Технология».",
+"Потому что люди — внешняя среда организации.",
+"Потому что ресурсами считаются только материальные объекты.",
+"Потому что в модели 7S люди отсутствуют."],
+e:"Маршев «осознанно исключил людей из списка ресурсов организации, считая людей единственными элементами организации, а всё остальное — ресурсами или средствами достижения целей»."},
+{t:"s12 lec",q:"Две производственные фирмы среднего бизнеса из одного региона. В оргструктуре одной нет роли «Маркетинг», у другой — роли «PR». Как это объясняет Маршев?",o:[
+"Так отражается понимание индивидуумами состояния внутренней и внешней среды: перечень ролей в определении организации не задан.",
+"Это ошибка: у всех фирм одной отрасли и размера должна быть одинаковая структура.",
+"Это означает, что обе фирмы не являются организациями.",
+"Роли определяются только законом, поэтому различие — нарушение.",
+"Набор ролей зависит только от отрасли и масштаба.",
+"Это доказывает, что модель организации состоит из 7 элементов."],
+e:"В определении организации перечень ролей не определён. Состав ролей определяется тем, как индивидуумы понимают состояние внутренней и внешней среды и осознают необходимость исполнять роли. Этим объясняется многоликость оргструктур."},
+{t:"s12 lec",q:"Почему Маршев называет области деятельности организации «функционалами», а не «функциями»?",o:[
+"Функция зависит от независимой переменной, а каждый функционал зависит от множества зависимых переменных.",
+"Потому что «функционал» — модное слово консультантов.",
+"Потому что функционалы описывают только IT-отделы.",
+"Потому что функции бывают только у государства.",
+"Потому что функционал — синоним должностной инструкции.",
+"Потому что Файоль запретил употреблять слово «функция»."],
+e:"«Мы их называем функционалами, а не функциями (которые зависят от независимой переменной), поскольку каждый из функционалов зависит от множества зависимых переменных»."},
+{t:"s16 lec",q:"Студент записал ИУМ = A₁f₁(x)+…+Aₙfₙ(x)+at и решил, что, найдя коэффициенты, полностью объяснит, почему менялись взгляды на управление. Как ограничить этот вывод?",o:[
+"Формализация — лишь язык описания: она не выражает всего, функциональная связь не заменяет причинную, а наука управления идиографична.",
+"Вывод верен: найденные коэффициенты дают полное причинное объяснение.",
+"Формула неверна в принципе: факторы на управленческую мысль не влияют.",
+"Достаточно увеличить число факторов, и модель станет номографическим законом.",
+"Математика — единственная наука, поэтому её выводы не нужно проверять.",
+"Формула объясняет всё, если исключить из неё время t."],
+e:"Маршев: «Математика — это не наука. Математика — это язык». Он цитирует Маслоу: функциональные формулировки не снимают проблемы причин. Формула (2) — лишь аналог модели Альтмана."},
+{t:"s16 lec",q:"Исследователь оценивает трактат XVIII века только с позиций современного менеджмента и объявляет автора «отсталым». В чём ошибка?",o:[
+"Он остаётся только в режиме современного наблюдателя; нужно чередовать его с «погружением» в эпоху, а выводы часто делать двойственными.",
+"Ошибки нет: прошлое нужно оценивать только по меркам современной науки.",
+"Ошибка в том, что XVIII век вообще не изучают в ИУМ.",
+"Нужно полностью отказаться от современных знаний и оценивать только на языке прошлого.",
+"Критерий истины — мнение современного гуру, а не практика.",
+"Ошибка лишь в выборе источника: трактаты не являются источниками ИУМ."],
+e:"Два крайних подхода — переоценка прошлого на языке современности и реконструкция на языке прошлого. Оба необходимы, но недостаточны. Маршев предпочитает второй, но не в чистом виде. Критерий истинности — практика управления того же и последующих периодов."},
+{t:"s16 lec",q:"Почему Маршев относит науку управления к идиографическим, а не номографическим наукам?",o:[
+"Её утверждения зависят от места, времени и исследователя: предмет — управленческие отношения в уникальных организациях.",
+"Потому что она открывает вечные законы, не зависящие от условий.",
+"Потому что в ней нет никаких закономерностей.",
+"Потому что она изучает только биографии гуру.",
+"Потому что её выводы проверяются лабораторными экспериментами.",
+"Потому что она возникла раньше всех остальных наук."],
+e:"Наука управления зависит от трёх факторов: места, времени, исследователя. Старосьцяк: рецептов нет, каждое учреждение работает в иных условиях, «мы ищем, скорее, довольно общие закономерности»."},
+{t:"s16 lec",q:"Какая связь, по Маршеву, плодотворнее для развития науки управления: «наука — обучение» или «наука — консультирование»?",o:[
+"Консультирование: консультанты проверяли идеи на «живом» материале клиентов, по сути проводя чистые эксперименты.",
+"Обучение: учебные программы создавали все научные открытия.",
+"Обе связи вредны для науки.",
+"Ни одна: наука управления развивается только в университетах.",
+"Консультирование, потому что консультанты не имели практического опыта.",
+"Обучение, потому что первое коммерческое училище открыто раньше всех консалтинговых фирм."],
+e:"Вторая пара отношений (наука — консультирование) плодотворнее, хотя без первой не было бы творчески мыслящих управленцев. Примеры: принципы эффективности Эмерсона, функции Файоля, реинжиниринг Хаммера."},
+{t:"s17 lec",q:"Как изменилось значение термина «полиция» при переходе от полицейского к правовому государству?",o:[
+"Он сузился до деятельности государства по обеспечению безопасности граждан и имущества; остальное стали называть «внутренним управлением».",
+"Он расширился и стал означать всё хозяйство страны.",
+"Он стал обозначать только налоги.",
+"Он исчез из языка вместе с камералистикой.",
+"Он стал синонимом слова «правительство».",
+"Он стал означать управление частными фирмами."],
+e:"Полиция перестала охватывать все внутренние функции. Для их совокупности стали говорить «административная деятельность» или «внутреннее управление», а «полиция» осталась для безопасности."},
+{t:"s17 lec",q:"Почему в последней четверти XIX в. возникла концепция управления культурным государством?",o:[
+"Правовое государство не удовлетворило новых запросов граждан; государство берёт на себя задачи благосостояния, сохраняя права личности.",
+"Потому что государство решило полностью отказаться от экономики.",
+"Потому что полицейское государство оказалось эффективнее правового.",
+"Потому что культура стала единственной отраслью хозяйства.",
+"Потому что общество потребовало вернуть мелочную регламентацию.",
+"Потому что монархи отождествили государство с собой."],
+e:"Гольцев: «государство не может безучастно глядеть на глубокие экономические явления… берёт на себя задачи благосостояния, непосильные отдельному гражданину… Правовое государство сменяется культурным»."},
+{t:"s23 lec",q:"Как Хань Фэй-цзы соотносит закон и «искусство управления»?",o:[
+"Закон записан и объявлен народу, искусство скрыто в сердце правителя; оба нужны одновременно как орудия власти.",
+"Закон и искусство — одно и то же, различие только в названии.",
+"Искусство управления нужно объявлять народу, а закон держать в тайне.",
+"Достаточно закона: искусство управления — лишнее.",
+"Достаточно искусства: законы мешают правителю.",
+"Искусство управления — это ритуал «ли» по Конфуцию."],
+e:"«Закон — то, что записано в книгах… и объявляется народу. Искусство управления скрыто глубоко в сердце правителя… Оба принципа должны быть налицо; они орудия власти правителя»."},
+{t:"s23 lec",q:"Чиновник обещал в докладе одно, а сделал значительно больше. Как поступит мудрый правитель по Хань Фэй-цзы?",o:[
+"Накажет: вред от несоответствия слов делу больше, чем польза от сделанного.",
+"Щедро наградит, ведь сделано больше обещанного.",
+"Повысит в должности и поручит ещё одну обязанность.",
+"Ничего не сделает: важен только результат.",
+"Отправит на перевоспитание ритуалом.",
+"Передаст решение народному собранию."],
+e:"«Чиновники, которые говорят мало, а делают много, также наказываются… вред от несоответствия слов делу значительно больше, чем сделанное дело»."},
+{t:"s23 lec",q:"В новом законе обнаружены недостатки. Как поступить по Хань Фэй-цзы?",o:[
+"Взвесить недостатки; если пользы всё же больше, закон вводят: «нет законов без недостатков, пользы без вреда».",
+"Отказаться от закона: закон должен быть совершенным.",
+"Отложить, пока не найдётся закон без недостатков.",
+"Ввести закон тайно, не объявляя народу.",
+"Заменить закон советом конфуцианских учёных.",
+"Спросить духов предков."],
+e:"Главное условие введения закона — выгода от его осуществления. Если при наличии вреда пользы больше, дело осуществляется."},
+{t:"s23 lec",q:"Какую последовательность действий рекомендует трактат «Гуаньцзы» (гл. 48 «Об управлении государством»)?",o:[
+"Сначала сделать народ богатым, а потом управлять им: богатым народом управлять легко.",
+"Сначала строго наказать народ, затем обогатить.",
+"Сначала развить торговлю предметами роскоши, затем земледелие.",
+"Управлять без оглядки на благосостояние: бедный народ послушнее.",
+"Сначала обучить всех письменности, затем дать землю.",
+"Сначала уничтожить общину, затем ввести налоги."],
+e:"«Для мудрого государя высшей заповедью является: сначала сделай народ богатым, а потом управляй им». Хлеб — «путь обогащения народа, путь управления страной»."},
+{t:"s23 lec",q:"Как Шэнь Пу-хай предлагал подбирать чиновников?",o:[
+"По способностям и компетенции, прошлым достижениям и старшинству — а не по рекомендациям и протекции.",
+"Только по рекомендациям уважаемых людей, как советовал Конфуций.",
+"Только по знатности рода.",
+"По жребию, чтобы исключить пристрастность.",
+"По размеру взноса в казну.",
+"По умению красиво говорить."],
+e:"Шэнь Пу-хай выступал против идеи подбирать чиновников по рекомендациям и протекции. Он создал систему син-мин: найм, экзамен, оценка, расстановка и контроль; кадры подбирались под дела."},
+{t:"s23 lec",q:"Какое место отводил Конфуций закону («фа») в управлении?",o:[
+"Вспомогательное: главное — социальный порядок на принципах морали, ритуал и личный пример добродетельного правителя.",
+"Главное: только жёсткий закон обеспечивает порядок.",
+"Никакого: Конфуций требовал отменить все законы.",
+"Закон нужен только для чиновников, а народом правят наказаниями.",
+"Закон — проявление небесной воли, выше ритуала.",
+"Закон и ритуал полностью равноценны."],
+e:"Конфуций отрицательно отзывался о законах из-за их связи с жестокими наказаниями, но полностью не отвергал их, отводя лишь вспомогательную роль."},
+{t:"s21 lec",q:"Почему документы, осмысляющие и обобщающие управленческую деятельность, появились значительно позже документов хозяйственной практики?",o:[
+"Из-за уникальности и узкой прагматичности управления: обобщения требовали подготовки и свободного времени, а административно-правовые документы были в приоритете.",
+"Потому что в древности не было письменности.",
+"Потому что управление тогда не осуществлялось.",
+"Потому что жрецы запрещали писать об управлении.",
+"Потому что хозяйственные документы не сохранились.",
+"Потому что первым трактатом об управлении стала работа Тейлора."],
+e:"Деловым гражданам древних царств не хватало времени и подготовки для обобщений с претензией на научность. К тому же приоритет административно-правовых документов долго сказывался на фиксации управленческих идей."},
+{t:"s21 lec",q:"Почему литература Древнего Востока имеет поучительный, догматический, государственно-нормативный характер?",o:[
+"Она отражала представление о божественном происхождении власти; повествование велось от имени фараонов, царей и высших сановников.",
+"Потому что её писали рабы для рабов.",
+"Потому что авторы были учёными-эмпириками.",
+"Потому что в деспотиях ценилась свобода мнений.",
+"Потому что тексты переводились с греческого.",
+"Потому что литература создавалась только для торговцев."],
+e:"Владыки преподносились как наместники Бога или выразители божьей воли. Действительность отражалась в той мере, в какой касалась владыки, — отсюда регламентирующий и часто бездоказательный характер."},
+{t:"s41 lec",q:"Почему на Руси после Ярослава сложился подвижной очередной порядок княжеского владения, а не закрепление уделов за линиями потомков?",o:[
+"Самые угрожаемые области у степи были и самыми богатыми; их оборону и доходы получал старший князь с наибольшими силами.",
+"Потому что князья не умели вести хозяйство.",
+"Потому что так велел византийский император.",
+"Потому что внешней торговли на Руси не было.",
+"Потому что Ярослав завещал всё одному младшему сыну.",
+"Потому что вече запрещало князьям оседать."],
+e:"Экономика Руси зависела от внешней торговли и безопасности степных путей. Благосостояние области определялось близостью к Киеву и степи. Оборона самых опасных областей требовала самого сильного — старшего, а старшинство переходило от князя к князю."},
+{t:"s41 lec",q:"Что на Руси играло роль «общих дел», которые в странах Древнего Востока выполняли оросительные системы?",o:[
+"Укрепление и охрана торговых путей, оборона степных границ и строительство городов.",
+"Строительство пирамид и зиккуратов.",
+"Ирригация полей Днепра.",
+"Перепись населения для храмов.",
+"Чеканка монет.",
+"Освоение Сибири."],
+e:"Маршев прямо проводит аналогию: на Руси общими делами, требовавшими управления, были охрана путей, оборона границ и градостроительство."},
+{t:"s41 lec",q:"Как Ярославичи XI–XII вв. понимали своё положение на Руси?",o:[
+"Как временщики, «речные викинги»: оборона земли — их обязанность, корм с неё — их право.",
+"Как полноправные вечные собственники своих уделов.",
+"Как выборные служащие веча.",
+"Как наместники византийского императора.",
+"Как настоятели монастырей.",
+"Как купцы Иванской корпорации."],
+e:"Князья видели в себе не владетелей, а наемных руководителей торга и сторожей путей. Слова изгнанного Изяслава к брату — «так мог говорить только наемный служащий»."},
+{t:"s14 lec",q:"В чём Маршев видит типичную методологическую слабость публикаций по ИУМ?",o:[
+"В нечётком разделении двух разных предметов — истории управления и истории управленческой мысли.",
+"В избытке архивных материалов.",
+"В том, что их пишут только математики.",
+"В отказе от изучения зарубежных авторов.",
+"В том, что они начинаются с Древнего Египта.",
+"В том, что в них нет формул."],
+e:"Причина «неполноты»: ИУМ ещё не стала признанным в научном мире историко-научным направлением. Даже работы Кравченко, Короткова, Макашова скорее отражают историю управления."},
+{t:"s17 lec",q:"Какой существенный недостаток Маршев видит в концепции менеджмента Тейлора?",o:[
+"В ней недоставало человека: он присутствовал в такой же неодушевлённой форме, как и прочие ресурсы.",
+"В ней не было методов наблюдения и измерения.",
+"Она касалась только государственного управления.",
+"Она отрицала производительность труда.",
+"Она была написана раньше работ Бэббиджа.",
+"Она запрещала нормирование труда."],
+e:"Научность Тейлора — в методах наблюдения и измерения. Но человек в ней был лишь ресурсом. Это и критика «теории выжимания пота» вызвали школу человеческих отношений."},
+
+/* ---------- §1.2 ---------- */
+{t:"s12",q:"Какие два атрибута, по Маршеву, делают совокупность «лиц» организацией?",o:["Общая цель (миссия) и формализованные структурированные отношения","Прибыль и иерархия","Лидер и устав","Ресурсы и технология"],e:"Определение 1: организация — совокупность двух и более «лиц», обладающих общей целью (миссией) и формализованными структурированными отношениями."},
+{t:"s12",q:"Сколько «лиц» минимально нужно для организации по определению Маршева?",o:["Два","Одно","Три","Семь"],e:"«Совокупность двух и более лиц»."},
+{t:"s12",q:"В каком смысле Маршев употребляет слово «лица» в определении организации?",o:["В теоретико-игровом: физические или юридические лица","Только физические лица","Только юридические лица","Только руководители"],e:"Сноска: «в теоретико-игровом смысле, т. е. физических лиц (индивидуумов) или юридических лиц»."},
+{t:"s12",q:"Из каких элементов состоит модель организации по Маршеву (Определение 2)?",o:["Индивидуумы, цели, структура","Персонал, структура, задачи, технология","Ресурсы, процессы, результаты","Стратегия, структура, системы"],e:"Модель организации — система из трёх элементов: индивидуумы, цели организации, структура организации."},
+{t:"s12 people dates",q:"Что входит в «Алмаз Ливитта» (1965)?",o:["Персонал, Структура, Миссия/Задачи, Технология","Индивидуумы, цели, структура","Власть, Культура, Техника, Бизнес-процессы","Strategy, Staff, Style, Skills"],e:"Г. Ливитт в 1965 г. предположил, что многообразие организаций производно от четырёх элементов."},
+{t:"s12",q:"Какой элемент НЕ входит в модель 7S McKinsey?",o:["Sales","Structure","Shared Values","Style"],e:"7S: Structure, System, Strategy, Staff, Shared Values, Skills, Style."},
+{t:"s12",q:"Какие три элемента 7S, по Маршеву, по существу характеризуют элемент Staff?",o:["Shared Values, Skills, Style","Structure, System, Strategy","Strategy, Skills, Staff","System, Style, Structure"],e:"«Очевидно, что три последних элемента, по существу, характеризуют элемент Staff (Персонал)»."},
+{t:"s12 people",q:"Что в интегральной модели Бодди и Пэйтона заменило «Технологию» из модели Ливитта?",o:["Бизнес-процессы","Культура","Власть","Информация"],e:"Технология заменена Бизнес-процессами; добавлены Техника, Власть и Культура."},
+{t:"s12 people",q:"Чьё определение: организация — вид кооперации людей, отличающийся сознательностью, предсказуемостью и целенаправленностью?",o:["Ч. Барнард","П. Блау и У. Скотт","Д. Марч и Г. Саймон","Д. Бодди и Р. Пэйтон"],e:"Определение Честера Барнарда."},
+{t:"s12 people",q:"Кто определил организацию как систему принятия и реализации решений, где люди — «механизмы принятия решений»?",o:["Д. Марч и Г. Саймон","Ч. Барнард","Г. Ливитт","А. Файоль"],e:"Марч и Саймон также сравнивали организацию с биологическим организмом."},
+{t:"s12",q:"Какое действие НЕ входит в пять ключевых ролей «организации в динамике»?",o:["Контроль подчинённых","Поиск и приобретение ресурсов","Преобразование ресурсов в продукты","Потребление приобретённого в обмене"],e:"Пять ролей: поиск ресурсов, преобразование, распределение, обмен, потребление."},
+{t:"s12 people dates",q:"Сколько групп операций выделил Файоль в 1916 г.?",o:["Шесть","Пять","Семь","Сорок две"],e:"Технические, коммерческие, финансовые, страховые, учётные, административные."},
+{t:"s12",q:"К какой группе операций Файоля относятся предвидение, организация, распорядительство, координирование и контроль?",o:["Административные","Коммерческие","Учётные","Технические"],e:"Шестая группа — административные операции."},
+{t:"s12 dates",q:"Какой функционал в табл. 1.1 помечен «2017, Apple»?",o:["Diversity of HR","Digitalization","Security&Insurance of ArtIntellect","Social Responsibility"],e:"Digitalization — 2018–2019, Security&Insurance of ArtIntellect — 2019."},
+{t:"s12",q:"Сколько функционалов насчитывает Маршев в современных организациях?",o:["Более 40","Ровно 6","Ровно 7","Около 12"],e:"В табл. 1.1 — 42, и перечень «и другие функционалы» не ограничен."},
+{t:"s12",q:"По какому критерию продолжается перечень функционалов организации?",o:["Минимизация рисков потери жизнеспособности и максимизация конкурентоспособности","Рост числа сотрудников","Требования закона","Мода на консалтинг"],e:"Перечень может быть продолжен согласно критерию «минимизации рисков…»."},
+{t:"s12",q:"Сколько атрибутов имеет управление организацией в Определении 3?",o:["Семь","Пять","Три","Шесть"],e:"Постоянное, осознанное, осмысленное, целенаправленное, системное, правомочное, ответственное."},
+{t:"s12",q:"Какой атрибут Маршев называет скорее «желательным» и нередко отсутствующим в фактическом управлении?",o:["Системное","Правомочное","Ответственное","Осознанное"],e:"Отсутствие системности порождает некомпетентное профессиональное управление."},
+{t:"s12",q:"Что означает атрибут «осознанное» в определении управления?",o:["Наличие воздействующего субъекта — ЛПР","Воздействие имеет смысл, идею","Воздействие опирается на систему","Право совершать юридически значимые действия"],e:"«Осознанное» — это воздействующий индивидуум (субъект) или ЛПР. «Осмысленное» — имеющее смысл, идею."},
+{t:"s12",q:"Какие виды ответственности ЛПР выделяет Маршев?",o:["Моральная, материальная, юридическая, политическая","Уголовная, административная, гражданская","Личная и коллективная","Финансовая и репутационная"],e:"Сноска к атрибуту «ответственное»."},
+{t:"s12",q:"Что означает вопрос «B» в трёх ключевых вопросах управления организацией?",o:["Каким мы хотим видеть положение организации через N лет","Каково существующее положение","Как перейти из A в B","Кто будет управлять организацией"],e:"A — текущее положение, B — желаемое через N лет, C — как достичь B."},
+{t:"s12",q:"Что иллюстрируют пунктирные стрелки в левой части рис. 1.1?",o:["«Не-марковость» (инерционность) социальных процессов","Цели организации","Конкурентов","Стратегические альтернативы"],e:"Это последствия и последействия принятых ранее решений."},
+{t:"s12 people",q:"Как звучит принцип Лоуренса Питера?",o:["В иерархии каждый служащий стремится достичь своего уровня некомпетентности","Управлять — значит предвидеть","Всё новое — комбинация старого","Чем больше организация, тем она эффективнее"],e:"Маршев называет это явление «управленческим мазохизмом»."},
+{t:"s12",q:"Какое правило Маршев связывает с «управленческим мазохизмом»?",o:["«Когда они не знают, что делать, они ещё усерднее делают то, что знают»","«Сначала сделай народ богатым»","«Никогда не отдавайте невыполнимых приказов»","«Не спеши с решениями»"],e:"Так ведут себя руководители в период обострения кризиса."},
+{t:"s12 dates",q:"Как изменилась доля Ford на рынке из-за упрямства Генри Форда?",o:["С 56% в 1921 г. до 10% в 1927 г.","С 80% до 40% за 1920-е","С 30% до 5% в 1930-е","С 56% до 28% в 1921–1923 гг."],e:"Почти в 6 раз; главный конкурент — Альфред Слоун (General Motors)."},
+{t:"s12 dates",q:"Что произошло с Cisco в апреле 2001 г.?",o:["2,5 млрд $ списаны в неликвиды, 8500 сотрудников временно уволены","Компания обанкротилась","Компанию купила Enron","CEO ушёл в отставку «по личным причинам»"],e:"CEO Д. Чэмберс до последнего прогнозировал 50% рост."},
+{t:"s12 people",q:"Кого коллеги называли «фанатиком максимального контроля»?",o:["Дж. Скиллинга (Enron)","Д. Чэмберса (Cisco)","Г. Форда","А. Слоуна"],e:"Скиллинг ушёл за три месяца до краха Enron (декабрь 2001) и говорил, что «понятия не имел» о состоянии компании."},
+{t:"s12",q:"Какая российская сеть в примерах Маршева скупала аптеки с 2004 г. без управленческих изменений, а с 2008 г. продавала активы?",o:["«36,6»","«Ригла»","«Самсон-Фарма»","«Горздрав»"],e:"Пример №4 «болезни» управленческого мазохизма."},
+{t:"s12 dates",q:"Какая компания стала одним из «лидеров» среди банкротов 2020 г. по Маршеву?",o:["Hertz Global Holdings","Enron","Cisco","Ford"],e:"Активы около 26 млрд $, пассивы более 24 млрд $."},
+{t:"s12 people",q:"Кто утверждал, что первопричина изменений в социальных системах — их внутренняя среда?",o:["Питирим Сорокин","Николай Бердяев","Генри Минцберг","Эдит Пенроуз"],e:"«Принцип имманентного изменения социокультурных систем и конгломератов». Внешняя среда ускоряет или замедляет изменения."},
+{t:"s12 people",q:"Кто с горечью отметил, что мир потерял общины, а им на смену пришли «организации»?",o:["Николай Бердяев","Питирим Сорокин","Павел Милюков","Пётр Столыпин"],e:"Бердяев, 1930-е."},
+{t:"s12 people dates",q:"Кто ввёл термин «цикличность» и выделил зарождение, расцвет и упадок?",o:["Полибий, II в. до н. э.","Платон, IV в. до н. э.","Вико, XVIII в.","Кондорсе, XVIII в."],e:"«Всеобщая история» Полибия."},
+{t:"s12 people",q:"Кто выделял у каждого народа век богов, век героев и век людей?",o:["Джамбаттиста Вико","Кондорсе","Монтескье","Шпенглер"],e:"Кондорсе предложил десятиэтапный цикл."},
+{t:"s12 people",q:"Кто наиболее остро критиковал биологические аналогии в изучении организаций?",o:["Эдит Пенроуз","Ицхак Адизес","Ларри Грейнер","Эрик Эриксон"],e:"Поведение организмов связано с химическими процессами, а не с осознанными решениями."},
+{t:"s12 people",q:"Кто применил идею жизненного цикла к проектной команде?",o:["Питер Капецио","Ицхак Адизес","Ларри Грейнер","Арнольд Тойнби"],e:"Модели ЖЦО: Грейнер, Адизес; ЖЦ проектной команды — Капецио."},
+{t:"s12 dates",q:"Какой была тема конгресса Академии менеджмента 8–13 августа 2008 г. в Анахайме?",o:["The Questions We Ask?","Understanding the Inclusive Organization","Where we were? Where are we? Where we will be?","Managers Not MBA’s"],e:"Впервые темой стал весь круг базовых вопросов — «почти по Сократу»."},
+{t:"s12 dates",q:"Где прошёл 79-й конгресс Академии менеджмента (2019) с темой «Understanding the Inclusive Organization»?",o:["Бостон","Чикаго","Анахайм","Нью-Йорк"],e:"25 дивизионов, более 11 000 участников, 9–13 августа 2019."},
+{t:"s12 people",q:"Чью монографию Маршев считает достойной «Нобелевской премии по менеджменту» уже за название?",o:["Г. Минцберг, «Managers Not MBA’s»","Дж. Коллинз, «От хорошего к великому»","Л. Питер, «Принцип Питера»","Р. Фостер и С. Каплан, «Созидательное разрушение»"],e:"Вывод: переизбыток узких специалистов-MBA и недостаток стратегически мыслящих менеджеров."},
+{t:"s12 people",q:"Кому принадлежит формула «Gouverner c’est prévoir» (править — значит предвидеть)?",o:["Наполеону","Файолю","Монтескье","Людовику XIV"],e:"Файоль, следуя ей, призывал ввести в преподавание «предвидение»."},
+{t:"s12 people",q:"Кто на площадке TED заявил: «Ключ к управлению — избавиться от менеджеров»?",o:["Рикардо Семлер","Генри Минцберг","Насим Талеб","Джим Коллинз"],e:"Маршев отмечает: Семлер не эксперт в теории управления."},
+{t:"s12 dates",q:"Сколько человек в России, по оценкам, попали в «квалификационную яму» в 2018 г.?",o:["33,9 млн","87,6 млн","58,6 млн","1,4 млрд"],e:"87,6 и 58,6 млн — Северная и Южная Америка; 1,4 млрд — прогноз ОЭСР на 2030 г."},
+{t:"s12",q:"Какие две ключевые причины объединения людей в организации называет Маршев?",o:["Природные потребности и врождённое неравенство способностей","Жажда власти и страх","Религия и традиции","Прибыль и конкуренция"],e:"Опираясь на Платона и Аристотеля."},
+{t:"s12 people",q:"Кто сказал, что «от природы человек склонен образовывать, скорее, пары, а не государства»?",o:["Аристотель","Платон","Конфуций","Гоббс"],e:"Аристотель, «Никомахова этика»; он же — «животное государственное»."},
+{t:"s12",q:"Какими двумя взаимосвязанными причинами Маршев объясняет ошибки в управлении организациями?",o:["Незнанием сущности самой организации и неумением ею управлять","Плохими законами и налогами","Нехваткой денег и кадров","Конкуренцией и кризисами"],e:"Поэтому §1.2 уделяет внимание первой причине — пониманию организации."},
+{t:"s12",q:"Что, по Маршеву, было выстроено в мире к кризису 2008 г., а что нет?",o:["Система финансов выстроена, а система управления финансовой системой — нет","Выстроена система управления, но не система финансов","Не выстроено ни то, ни другое","Выстроено и то, и другое"],e:"Выявилась безграмотность финансовых менеджеров, не применивших стратегический риск-менеджмент и сценарное планирование."},
+{t:"s12 dates",q:"До какого уровня упала цена нефти в конце 2018 г., хотя аналитики обещали 100 $?",o:["53,8 $","30 $","200 $","75 $"],e:"«Обещали» 200 $ в 2008 г. — получили 30 $ в 2009 г."},
+{t:"s12 people",q:"Чей совет Маршев приводит при формулировании определений: «Вещь следует делать настолько простой, насколько возможно, но не проще»?",o:["Альберта Эйнштейна","Аристотеля","Анри Файоля","Абрахама Маслоу"],e:"Перед авторскими определениями «организация» и «модель организации»."},
+
+/* ---------- §1.4 ---------- */
+{t:"s14",q:"Какую причину многоликого состояния науки управления Маршев считает главной методологической?",o:["Отсутствие налаженных процедур проверки истинности гипотез","Недостаток финансирования","Слишком много учебников","Отсутствие математики"],e:"Она обусловлена невозможностью многократных экспериментов, уникальностью условий и трудностью измерений."},
+{t:"s14",q:"Какие науки, по Маршеву, уже давно используют реальный жизненный процесс как материал для эксперимента?",o:["Политэкономия, история, демография, правоведение","Физика, химия, биология","Математика и логика","Кибернетика и информатика"],e:"Этот выход Маршев предлагает и науке управления."},
+{t:"s14",q:"Какое соотношение, по Маршеву, аналогично соотношению «общественная практика — управленческий эксперимент»?",o:["«Данные — информация», «наследство — наследие»","«Теория — практика»","«Цель — средство»","«Факт — миф»"],e:"Не всякие данные — информация, но всякая информация — обработанные данные."},
+{t:"s14",q:"Как Маршев отвечает на вопрос «Почему мы должны оглядываться в прошлое?»",o:["«Да потому, что в принципе больше некуда и смотреть!»","«Потому что история повторяется»","«Потому что так требует министерство»","«Потому что прошлое лучше настоящего»"],e:"Простой ответ после актуализации проблем реального менеджмента."},
+{t:"s14 dates people",q:"До какого времени наука управления не вела целенаправленных историко-управленческих исследований и чьей работой было положено начало?",o:["До конца 1960-х; трактат Клода Джорджа","До 1911 г.; Тейлор","До 1860-х; Штейн","До 1988 г.; Маршев"],e:"При этом сама управленческая деятельность существует более 7 тысячелетий."},
+{t:"s14 dates",q:"В каком году Маршев предложил расширенную классификацию научных основ управления (табл. 1.2)?",o:["1988","1985","1965","2008"],e:"Впервые разделы 3.2 и 3.3 опубликованы в автореферате докторской 1987 г.; определения — в статье 1985 г."},
+{t:"s14",q:"В чём оригинальность классификации научных основ управления Маршева?",o:["Рядом с наукой управления стоят равноправные разделы: история управления и история управленческой мысли","В неё включена кибернетика","Она отказывается от философии","В ней только прикладные науки"],e:"Маршев считает эти разделы основами науки управления."},
+{t:"s14",q:"В какой блок классификации входит история управленческой мысли?",o:["Общие теоретико-исторические науки","Фундаментальные (методологические) науки","Прикладные науки","Математические науки"],e:"Блок 3: 3.1 наука управления, 3.2 история управления, 3.3 ИУМ, 3.4 историография ИУИ."},
+{t:"s14",q:"К какой группе научных основ управления Маршев относит кибернетику и исследование операций?",o:["Прикладные науки","Фундаментальные науки","Общие теоретико-исторические","Не включены"],e:"Прикладные: планирование, статистика, финансы, учёт, право, психология и социология управления, исследование операций, кибернетика, информатика."},
+{t:"s14",q:"К какой группе относится праксеология?",o:["Фундаментальные (методологические) науки","Прикладные науки","Общие теоретико-исторические","История управления"],e:"Фундаментальные: философия, экономика, история, география, праксеология, социология, психология, политология, демография."},
+{t:"s14",q:"Что входит в раздел 3.1 «Наука управления общественным производством»?",o:["Теория руководства и теория управленческого искусства","История управления и ИУМ","Статистика и учёт","Философия и экономика"],e:"3.1.1 Теория руководства; 3.1.2 Теория управленческого искусства."},
+{t:"s14",q:"Что является предметом истории управленческой мысли (Опр. 7)?",o:["Процесс возникновения, развития, борьбы и смены учений, концепций, теорий, взглядов, идей об управлении","Процесс смены конкретных систем управления и управленческих отношений","Совокупность всех ИУИ с древности","Биографии менеджеров"],e:"Второй вариант — предмет истории управления (Опр. 5); третий — историография ИУИ."},
+{t:"s14",q:"Что является предметом истории управления как науки (Опр. 5)?",o:["Процесс возникновения, развития, борьбы и смены конкретных систем управления и управленческих отношений в прошлом","Процесс смены идей и теорий управления","Критический обзор источников","Методы управления будущим"],e:"Отличайте: ИУ — системы и отношения; ИУМ — идеи и теории."},
+{t:"s14",q:"Каким выражением Маршев оценивает общее состояние управленческой мысли?",o:["«Управление имеет давнее прошлое, но очень короткую историю»","«Менеджмент мёртв»","«Всё новое — хорошо забытое старое»","«История учит, что ничему не учит»"],e:"Мысли об управлении древние, а ИУМ как наука — молода."},
+{t:"s14 dates people",q:"Что Маршев напомнил участникам круглого стола 2018 г. о 1881 годе?",o:["Тейлор выиграл чемпионат США по теннису в паре, а Гольцев уже читал курс «Учение об управлении»","Тейлор опубликовал «Принципы научного управления»","Открылась первая школа бизнеса в России","Файоль сформулировал функции управления"],e:"Против «торопливых» исследователей, приписывающих первенство в «научном управлении» специалистам начала XX в."},
+{t:"s14 people",q:"Кто был учителем В. Гольцева и автором 7-томного «Die Verwaltungslehre»?",o:["Лоренц фон Штейн","Иоганн Юсти","Йозеф Зонненфельс","Макс Вебер"],e:"«Учение об управлении», 1860-е гг."},
+{t:"s14 dates",q:"Где прошёл 78-й конгресс Академии менеджмента (2018) с круглым столом «Where we were? Where are we? Where we will be?»",o:["Чикаго","Бостон","Анахайм","Москва"],e:"Дивизион Management History, август 2018."},
+{t:"s14",q:"Как звучит формула Маршева о новых управленческих средствах?",o:["«Всякое новое средство — это новая комбинация старых, ранее известных средств, в новых условиях»","«Всякое новое средство отменяет старые»","«Новых средств не бывает»","«Средство определяется только целью»"],e:"Связано с аналогией лекарств от вечных болезней — идиографичностью науки."},
+{t:"s14",q:"Что является методом историографии историко-управленческих исследований?",o:["Источниковедение ИУИ","Математическое моделирование","Лабораторный эксперимент","Анкетирование менеджеров"],e:"Объект ИИУИ — ИУ и ИУМ; результат — знания о развитии ИУИ."},
+{t:"s14",q:"С чего начинается познание по принципу научного историзма?",o:["С выявления социально-экономических факторов (причин) возникновения изучаемой системы или идеи","Со сравнения с современностью","С подсчёта цитирований","С оценки автора"],e:"Затем — формы проявления в конкретных условиях; затем — связи настоящего с прошлым и будущим."},
+{t:"s14 people",q:"Чьи рассуждения о военном историческом опыте Маршев обобщает в трёх способах использования исторических фактов?",o:["К. Клаузевица, «О войне»","Сунь-цзы, «Искусство войны»","Н. Макиавелли, «Государь»","Наполеона"],e:"Сноска к §1.4."},
+{t:"s14",q:"Что требуется для исторического доказательства?",o:["Указание на исторический факт, обязательно достоверный и правдоподобный","Подробное воспроизведение эпохи в мельчайших деталях","Простое упоминание без проверки","Математическая формула"],e:"Подробность нужна для исторического предсказания, простое упоминание — для образца."},
+{t:"s14",q:"Какой из трёх способов использования исторического опыта Маршев считает наиболее важным для развития науки?",o:["Историческое предсказание","Исторический образец","Историческое доказательство","Все равнозначны"],e:"В этом случае опыт разворачивается подробно во времени и пространстве."},
+{t:"s14",q:"В чём специфика основного метода исследователя истории управления — «наблюдения»?",o:["Наблюдать приходится в основном только текст, часто ненаучный","Наблюдение ведётся только в лаборатории","Наблюдать можно лишь современных менеджеров","Наблюдение запрещено"],e:"Это одна из главных трудностей формирования исторических фактов."},
+{t:"s14",q:"Чего, по Маршеву, нет в фундаментальных трудах зарубежных авторов по ИУМ?",o:["Развития управленческой мысли в России","Древнего Египта","Научного менеджмента","Школы человеческих отношений"],e:"Хотя Врен и Бедеян изучали распространение идей Тейлора и Гантта в советской республике."},
+{t:"s14 people",q:"Какие работы, по Маршеву, скорее отражают историю управления, чем историю управленческой мысли?",o:["Кравченко, Короткова и соавт., Макашова и Овчинниковой","Клода Джорджа и Даниэля Врена","Штейна и Гольцева","Гастева и Ерманского"],e:"Это видно даже по названиям и оглавлениям."},
+{t:"s14 people",q:"Чья советская работа посвящена истории зарубежных теорий управления XX в.?",o:["Д. М. Гвишиани","О. А. Дейнеко","Д. М. Беркович","Э. Б. Корицкий"],e:"Остальные советские работы — в основном об истории советской управленческой мысли."},
+{t:"s14 dates",q:"С какого года в МГУ проводятся международные конференции по истории управленческой мысли и бизнеса?",o:["1996","1988","2008","1975"],e:"Их материалы — важный источник статей по периодам ИУМ."},
+{t:"s14",q:"По какой ИУМ советские и постсоветские авторы провели наиболее глубокие исследования?",o:["По зарубежной","По российской до XX в.","По древнекитайской","По древнеегипетской"],e:"Практически нет исследований по России до XX в."},
+{t:"s14 people",q:"Кто возглавлял дивизион Management History Академии менеджмента в 2013–2018 гг.?",o:["Бредли Боуден","Даниэль Врен","Артур Бедеян","Генри Минцберг"],e:"Главный редактор журнала Management History."},
+
+/* ---------- §1.6 ---------- */
+{t:"s16",q:"Как Маршев характеризует науку управления по отношению к реальной управленческой деятельности?",o:["Как вторичное образование","Как первичную причину деятельности","Как отрасль математики","Как часть богословия"],e:"ИУМ, соответственно, — история этого вторичного образования."},
+{t:"s16 people dates",q:"Кто писал, что науки об организации не дают «катехизиса рецептов», а ищут общие закономерности?",o:["Ежи Старосьцяк, 1965","Анри Файоль, 1916","Абрахам Маслоу, 1954","Карл Маркс"],e:"«Элементы науки управления» (1965)."},
+{t:"s16",q:"Что потребует от историков управленческой мысли признание идиографичности ИУМ?",o:["Переосмыслить термин «парадигма» или отказаться от него","Отказаться от изучения Китая","Перейти к лабораторным экспериментам","Признать науку номографической"],e:"Маршев обещает часто повторять этот тезис."},
+{t:"s16",q:"Что является предметом историко-научной реконструкции в ИУМ?",o:["Всё, что происходило, включая отброшенное как ошибочное","Только идеи, вошедшие в современную науку","Только успешные теории","Только западные учения"],e:"Важно выявить причины, а не перечислить достижения."},
+{t:"s16",q:"Что Маршев считает первым фактором развития ИУМ?",o:["Совокупность условий материальной жизни общества","Личность автора концепции","Религию","Моду на консалтинг"],e:"«Реальный базис», над которым возвышается управленческая надстройка."},
+{t:"s16",q:"Что относится ко второму фактору развития ИУМ?",o:["Демографические, религиозные, культурные, этнические, национальные особенности и сословно-классовая структура","Уровень развития техники","Курс валют","Число университетов"],e:"Сословно-классовый подход позволяет выявить и инвариантное."},
+{t:"s16",q:"Какой метод неизбежен при учёте внешних факторов развития ИУМ?",o:["Историко-сравнительный","Экспериментальный","Статистический выборочный","Метод Дельфи"],e:"Оценить учение можно лишь в контексте всемирной управленческой мысли."},
+{t:"s16",q:"Почему ИУМ, по Маршеву, — функционал, а не просто функция факторов?",o:["Потому что ИУМ зависит от зависимых переменных (каждый фактор сам зависит от многих параметров)","Потому что ИУМ не зависит ни от чего","Потому что в формуле нет времени","Потому что факторы постоянны"],e:"x — вектор; например, демография зависит от рождаемости, смертности и т. д."},
+{t:"s16",q:"Аналогом какой модели Маршев называет линейную формулу ИУМ с коэффициентами Aᵢ?",o:["Модели Альтмана","Модели Ливитта","Модели 7S","Модели Адизеса"],e:"Задача — выявить коэффициенты, то есть значимость каждого фактора."},
+{t:"s16",q:"Какое «нестандартное утверждение» высказывает Маршев как математик?",o:["«Математика — это не наука. Математика — это язык»","«Математика — царица наук»","«Всё в управлении можно посчитать»","«Математика не нужна менеджеру»"],e:"Как музыка или спорт; формализация не может выразить всего."},
+{t:"s16 people dates",q:"Чьи слова о замене причинности «функциональностью» связей приводит Маршев?",o:["Абрахама Маслоу, 1954","Альберта Эйнштейна, 1905","Макса Вебера, 1920","Карла Маркса, 1867"],e:"Комментарии к трактату «Мотивация и личность»."},
+{t:"s16",q:"Каков основной вопрос истории управленческой мысли?",o:["«ПОЧЕМУ менялись взгляды на управление социальными объектами?»","«Кто первым придумал менеджмент?»","«Сколько стоит управление?»","«Когда появились организации?»"],e:"Отвечая, нужно помнить и о словах Маслоу, и о наставлении Аристотеля."},
+{t:"s16 dates",q:"С какого времени появляются документы, представляющие попытку осмыслить управление хозяйственной деятельностью?",o:["С XVII–XVIII вв.","С 5 тыс. до н. э.","С XX в.","С эпохи Возрождения (XV в.)"],e:"Документы хозяйственной практики — с 5 тыс. до н. э."},
+{t:"s16 dates",q:"К какой эпохе относятся наиболее ранние письменные документы хозяйственной деятельности?",o:["5 тыс. до н. э., эпоха меди и бронзы","XX в. до н. э., эпоха железа","I тыс. до н. э.","Палеолит"],e:"Иероглифические надписи древних царств."},
+{t:"s16",q:"Какая методологическая проблема историко-научных исследований, по Маршеву, наименее разработана?",o:["Источниковедческая","Периодизация","Терминология","Математизация"],e:"Поэтому он лишь высказывает своё представление о путях решения."},
+{t:"s16",q:"Каков критерий истинности знания, реконструируемого при анализе прошлого?",o:["Практика управления того же и последующих периодов","Мнение современных гуру","Число публикаций","Соответствие современным учебникам"],e:"Так Маршев завершает обсуждение двух исследовательских режимов."},
+{t:"s16",q:"Почему управленческие идеи до XX в. искали в трудах по смежным наукам?",o:["До начала XX в. не было предметно и институционально выделенной науки управления","Потому что управленцы писали только стихи","Потому что смежные науки запрещали управление","Потому что идей управления не существовало"],e:"Политэкономия, полицейское право, социология и др. «давно арендованы» другими науками."},
+{t:"s16",q:"Какую деятельность Маршев называет «онтологически самой эклектичной»?",o:["Управление","Политику","Экономику","Право"],e:"Менеджеры пользуются достижениями всех других наук."},
+{t:"s16 people",q:"Какую новую категорию, по Марксу (т. 3 «Капитала»), вызвало отделение управления от собственности?",o:["«Оплата труда наемных управляющих»","«Прибавочная стоимость»","«Плата за надзор»","«Земельная рента»"],e:"Сначала доход предпринимателя имел форму «платы за надзор», затем с акционерными обществами появилась новая категория."},
+{t:"s16 dates",q:"Где и когда открыто первое высшее коммерческое училище в России?",o:["Москва, 1772","Санкт-Петербург, 1703","Казань, 1840","Москва, 1881"],e:"Первая школа бизнеса в США — 1881 г."},
+{t:"s16 dates",q:"Когда в США открыта первая школа бизнеса?",o:["1881","1772","1911","1916"],e:"Сравните с Россией — 1772 г."},
+{t:"s16 people",q:"Кто из консультантов, по Маршеву, разработал технологии реинжиниринга бизнес-процессов?",o:["М. Хаммер","Г. Эмерсон","А. Гастев","П. Керженцев"],e:"Эмерсон — принципы эффективности; Гастев, Ерманский, Керженцев — НОТ."},
+{t:"s16",q:"Кто, по гипотезе Маршева, стал основным источником научных идей управления с момента появления консалтинговых компаний?",o:["Консультанты","Монархи","Профессора права","Журналисты"],e:"До этого (примерно до начала XIX в.) творцами были практики и учёные."},
+{t:"s16",q:"Что, по Маршеву, представляет собой бизнес-среда?",o:["Алгебраическую сумму внутренней и внешней среды организации","Только рынок","Только конкурентов","Только государство"],e:"Определение дано в отступлении о слабости математического языка."},
+{t:"s16",q:"Как Маршев советует относиться к утопическим (для своего времени) взглядам?",o:["Очень внимательно и бережно: они часто оказываются ценными позже","Исключать из анализа","Высмеивать как ошибки","Считать главной частью ИУМ"],e:"Творческий характер идей не должен оставаться вне внимания историка."},
+
+/* ---------- §1.7 ---------- */
+{t:"s17",q:"Что Маршев считает наиболее веским доказательством профессиональной управленческой деятельности в Древнем Египте?",o:["Крупные оросительные системы и «великие пирамиды»","Бумеранги и гарпуны","Глиняные сосуды","Календарь"],e:"Они требовали знаний, планов, многотысячных коллективов и специализации."},
+{t:"s17 dates",q:"Когда в Египте появились первые государства в пределах номов?",o:["В середине 4 тыс. до н. э.","В 20 тыс. до н. э.","В XV в. до н. э.","В III в. до н. э."],e:"Тогда наметились сословные прослойки и классы."},
+{t:"s17 people",q:"Кто, возможно впервые в ИУМ, обосновал разделение общественного труда как средство повышения эффективности?",o:["Платон","Адам Смит","Чарльз Бэббидж","Конфуций"],e:"«Люди рождаются не слишком похожими друг на друга… можно сделать всё лучше и легче, если выполнять одну работу»."},
+{t:"s17",q:"Какие три этапа прошли системные представления об управлении государственным хозяйством?",o:["Полицейское, правовое, культурное государство","Рабовладельческое, феодальное, капиталистическое","Древнее, средневековое, новое","Монархия, республика, демократия"],e:"Объект — всё хозяйство государства, субъект — государство."},
+{t:"s17",q:"С чем связывается начало первого этапа — управления полицейским государством?",o:["С теорией естественного права, впервые выдвинутой в Древнем Китае","С трудами Тейлора","С Великой французской революцией","С учением Канта"],e:"А также с древнегреческим эвдемонизмом (учением о счастье)."},
+{t:"s17",q:"Что означало древнегреческое «πολιτεια»?",o:["Искусство управления хозяйством полисов","Военная служба","Храмовое хозяйство","Налог на землю"],e:"Отсюда — «полицейское государство»."},
+{t:"s17",q:"Как в древнеиндийских трактатах трактовалось «искусство управления» (dandaniti)?",o:["Как искусство наказания, руководство «владения палкой»","Как искусство торговли","Как умение назначать чиновников","Как музыка"],e:"У древних китайцев — умение назначать чиновников и определять их способности."},
+{t:"s17",q:"Какая черта характерна для «полицейского государства»?",o:["Мелочная государственная регламентация общественной и частной жизни","Полное невмешательство государства","Разделение властей","Местное самоуправление"],e:"Например, ткачи обязаны были использовать точно определённое число ниток."},
+{t:"s17 people",q:"Кто из перечисленных — одни из первых российских полицеистов?",o:["Ю. Крижанич, Гр. Котошихин, И. Посошков","М. Сперанский, И. Платонов, В. Лешков","В. Гольцев, В. Левитский, Л. Гумплович","А. Гастев, О. Ерманский, П. Керженцев"],e:"Сперанский и др. — концепция правового государства; Гольцев и др. — культурного."},
+{t:"s17",q:"Откуда происходит слово «камералист»?",o:["От лат. camera — дворцовая казна","От греч. kamara — свод","От нем. Kammer — палата суда","От франц. camarade — товарищ"],e:"Камералисты — специалисты по управлению казной, учреждениями, имуществом."},
+{t:"s17 dates people",q:"С какого года и по чьей инициативе в России стали готовить камералистов?",o:["С 1840 г., Николай Лобачевский (Казанский университет)","С 1772 г., Екатерина II","С 1755 г., Ломоносов","С 1881 г., Гольцев"],e:"Лобачевский — математик и ректор Казанского университета."},
+{t:"s17 people",q:"Кто назвал камералистику «кашей из всякой всячины, политой эклектически-экономическим соусом»?",o:["Ф. Энгельс","К. Маркс","Л. Штейн","М. Сперанский"],e:"То, что требовалось знать к экзамену на должность чиновника."},
+{t:"s17",q:"Какой социальный слой выступил на борьбу с полицейским государством?",o:["Третье сословие, окрепшая буржуазия","Духовенство","Крестьянство","Аристократия"],e:"Мелочная регламентация мешала конкуренции и росту капиталистической промышленности."},
+{t:"s17 people",q:"Кто ввёл термин «учение об управлении» вместо «науки о полиции»?",o:["Лоренц фон Штейн","Иоганн Юсти","Адам Смит","Шарль Монтескье"],e:"Семитомный труд 1860-х гг."},
+{t:"s17",q:"Что, по Штейну, является объектами внутреннего управления?",o:["Физическая, духовная, общественная и хозяйственная жизнь личности","Только армия и полиция","Только финансы","Только внешняя политика"],e:"Предмет — внутреннее управление, доставляющее человеку условия, недостижимые его собственными силами."},
+{t:"s17 people",q:"Кто из идеологов концепции культурного государства был учеником Штейна и доцентом Московского университета?",o:["В. Гольцев","В. Левитский","Л. Гумплович","М. Сперанский"],e:"Его курс «Учение об управлении» читался уже в 1881 г."},
+{t:"s17 people",q:"Кто разделил функции государственного управления на обязательные («существенные») и факультативные («специфические»)?",o:["Г. Бартелеми","Дж. Ваккелли","Фр. Персико","К.-Т. Инама-Штернег"],e:"Обязательные: военное, судебное, полицейское, финансовое управление."},
+{t:"s17 people",q:"Кто первым сформулировал понятие «административной психологии»?",o:["Дж. Ваккелли","Де-Бернардо","Л. Гумплович","Г. Бартелеми"],e:"Наука управления по Ваккелли изучает психологические аспекты администрации вместе с прочими."},
+{t:"s17 people",q:"Какой ученик Штейна много писал о методах управления — «материальных», «нравственных», правовых, полицейских?",o:["К.-Т. Инама-Штернег","В. Ивановский","Т. Дюкрок","М. Гориу"],e:"Германия, последняя четверть XIX в."},
+{t:"s17 people dates",q:"Чей трактат «Экономика машин и мануфактур» (1832) делает автора пионером научного исследования управления предприятием?",o:["Чарльза Бэббиджа","Эндрю Юра","Генри Тауна","Фредерика Тейлора"],e:"10 лет наблюдений и экспериментов; создатель «аналитической» машины."},
+{t:"s17 people",q:"Кто призывал «заменить ручное производство механической наукой»?",o:["Эндрю Юр, «Философия производства» (1835)","Чарльз Бэббидж","Генри Таун","Гаррингтон Эмерсон"],e:"Следуя идеям Бэббиджа о специализации."},
+{t:"s17 people dates",q:"Кто в 1886 г. выступил в Американском обществе механиков-инженеров с докладом «Инженер как экономист»?",o:["Генри Таун","Фредерик Тейлор","Гаррингтон Эмерсон","Генри Гантт"],e:"Он актуализировал менеджмент как самостоятельную сферу знания."},
+{t:"s17 people",q:"Кого назвали «инженером по эффективности»?",o:["Гаррингтона Эмерсона","Генри Тауна","Анри Файоля","Элтона Мэйо"],e:"Он также доказывал неэффективность громоздких организаций (уменьшение отдачи от масштаба)."},
+{t:"s17 people dates",q:"Чей двухтомный трактат «Основы машиностроения» (1883–1885) опередил иностранные системные работы по управлению производством?",o:["Ивана Тиме","Виктора Гольцева","Ивана Посошкова","Алексея Гастева"],e:"Организация машиностроительных фабрик в техническом и экономическом отношениях."},
+{t:"s17 dates",q:"Как изменилось число фабрик и заводов в России с 1710 по 1861 г.?",o:["Со 150 до 14 148 — почти в 100 раз","С 1000 до 5000","С 50 до 500","Со 150 до 1500"],e:"Свидетельство прогрессивности национальной предпринимательской мысли."},
+{t:"s17",q:"Чем примечательна Александровская хлопкопрядильная мануфактура в Санкт-Петербурге?",o:["Создание в России первой фабрики, минуя мануфактуру","Первое акционерное общество в Европе","Первая школа бизнеса","Первый государственный банк"],e:"Пример того, что Россия шла своим национальным путём."},
+{t:"s17 dates",q:"Какие функции управления сформулировал Файоль в 1916 г.?",o:["Прогнозирование, планирование, организация, руководство, координация, контроль","Планирование, мотивация, контроль","Учёт и контроль","Найм, обучение, оценка"],e:"Субъектные функции, не зависящие от объекта управления."},
+{t:"s17 people dates",q:"Кто из русских учёных ещё в 1883 г. сформулировал нечто подобное функциям Файоля, но для госуправления?",o:["В. Ивановский","В. Гольцев","И. Тиме","Н. Рождественский"],e:"В учебном курсе о внутреннем управлении."},
+{t:"s17 people",q:"Чьи эксперименты легли в основу школы человеческих отношений (1920-е)?",o:["Э. Мэйо и Ф. Ротлисбергера","Ф. Тейлора и Г. Гантта","А. Файоля","Ф. и Л. Гилбретов"],e:"Производительность объяснялась социальными условиями и отношениями в группе."},
+{t:"s17",q:"Какое звено стали добавлять к триаде «знания–умения–навыки»?",o:["«Волю менеджера»","«Харизму лидера»","«Опыт работы»","«Цифровую грамотность»"],e:"Отсюда интерес к лидерству, власти, принятию решений."},
+{t:"s17",q:"Как, по Маршеву, развивалась управленческая мысль с 5000 до н. э. до конца XIX в.?",o:["От мозаичных идей к «одномерным учениям» и затем к «синтетическим учениям»","От систем к отдельным идеям","Без изменений","От науки к искусству"],e:"Синтетические учения исследуют систему управления в целом."},
+{t:"s17 dates",q:"Когда стал разрабатываться системный подход к управлению?",o:["В 40–60-е гг. XX в.","В 1916 г.","В 1880-е гг.","В 1990-е гг."],e:"Школа социальных систем, социотехнических систем, исследование операций, ситуационный подход."},
+{t:"s17",q:"С какого времени центр исследований управления промышленными предприятиями перемещается в США?",o:["С 50-х гг. XIX в. («американская система производства»)","С 1916 г.","С 1945 г.","С XVIII в."],e:"Объекты: текстильная, горнозаводская, сталелитейная промышленность, железные дороги."},
+{t:"s17",q:"Какие два прикладных вопроса особенно привлекали внимание в последней четверти XIX в.?",o:["Подготовка кадров управления и мотивация управленческих кадров","Реклама и маркетинг","Цифровизация и ИИ","Экология и CSR"],e:"Наряду с централизацией/децентрализацией и оргструктурами."},
+{t:"s17",q:"Какими примерами Маршев завершает §1.7?",o:["Иллюстрациями свойства не-марковости социальных процессов ИУ и ИУМ","Списком банкротств","Табелью о рангах","Таблицей 7S"],e:"Также выявлены причины развития управленческой мысли."},
+
+/* ---------- §2.1 ---------- */
+{t:"s21",q:"Какой признак НЕ входит в перечень признаков цивилизации?",o:["Монотеистическая религия","Письменность","Город","Крупномасштабные строительные работы"],e:"Шесть признаков: производящее хозяйство, частная собственность, письменность, государство и право, город, монументальные строительные работы."},
+{t:"s21",q:"Как называют общества, где классы возникли через монополизацию общественных функций?",o:["Общества азиатского способа производства","Общества античного способа производства","Феодальные общества","Капиталистические общества"],e:"Месопотамия, Египет, Передняя Азия, Индия, Китай."},
+{t:"s21",q:"Какие страны, по Маршеву, шли по пути античного способа производства?",o:["Древний Рим и Древняя Греция","Египет и Месопотамия","Индия и Китай","Шумер и Аккад"],e:"Классы там возникли через частное производство и собственность семей."},
+{t:"s21",q:"Какие управленческие функции, по Маршеву, предопределило ведение государственного хозяйства уже в древности?",o:["Планирование, организация, координация, мотивация, учёт, контроль","Маркетинг и продажи","Только контроль","Реклама и PR"],e:"Например, при строительстве оросительных систем."},
+{t:"s21",q:"Какой пример страхового фонда для стратегических задач управления приводит Маршев?",o:["Амбарная система Древнего Китая","Пенсионный фонд Рима","Банк Венеции","Касса взаимопомощи гильдий"],e:"Аналогичные формы были в Шумере и Египте."},
+{t:"s21",q:"Кого избирали в ирокезском роде?",o:["Старейшину для мирного времени и военного вождя; создавался совет из сахемов","Архонта, басилея и казначея","Фараона и визиря","Тысяцкого и сотских"],e:"Архонт, басилей и казначей — у греческого рода."},
+{t:"s21",q:"Кого избирали в греческом роде?",o:["Архонта (старейшину), басилея (военачальника) и казначея","Сахема и вождя","Вана и чжухоу","Посадника и тысяцкого"],e:"Также формировался совет старейшин и собирались народные собрания."},
+{t:"s21",q:"Какова структура органов управления в древних обществах по табл. 2.1 (снизу вверх)?",o:["Род → фратрия → племя","Семья → община → государство","Ном → царство → империя","Десяток → сотня → тысяча"],e:"У каждого уровня — свой совет; у рода и племени — старейшина."},
+{t:"s21",q:"Какие две важнейшие причины появления древних трактатов об управлении называет Маршев?",o:["Необходимость централизованного управления (ирригация) и потребность в усилении центральной власти","Любопытство жрецов и мода","Торговля с Римом и Грецией","Изобретение бумаги и печати"],e:"Вторая причина — войны, объединение владений, классовая борьба."},
+{t:"s21 people",q:"Как называет себя Хаммурапи в своём кодексе?",o:["«Пастырь, избранный богом Энлилем… дракон среди царей»","«Сын неба»","«Государство — это я»","«Названный отец своей братии»"],e:"Пример представления о божественном происхождении власти."},
+{t:"s21 people dates",q:"Какой фараон построил «Лабиринт» не менее чем на 3000 помещений для богов?",o:["Аменемхет III, вторая половина XIX в. до н. э.","Хеопс, XXVI в. до н. э.","Рамсес II, XIII в. до н. э.","Амасис, VI в. до н. э."],e:"Попытка собрать всех богов под одной крышей."},
+{t:"s21 dates",q:"К какому веку относятся «Поучения Гераклеопольского царя своему сыну Мерикара»?",o:["XXII в. до н. э.","XV в. до н. э.","XVIII в. до н. э.","IV в. до н. э."],e:"«Поучения Ахтоя» — XXI в., «Речения Ипусера» — XVIII в."},
+{t:"s21 dates",q:"Когда жил египетский чиновник Мечен, чьи надписи содержат перечень должностей?",o:["XXVIII в. до н. э., Древнее царство","XV в. до н. э., Новое царство","XXV в. до н. э.","IV в. до н. э."],e:"Правитель домов и селений, управляющий номами, руководитель писцов и т. д."},
+{t:"s21 dates",q:"Какой документ XV в. до н. э. называют образцом бюрократического творчества Египта Нового царства?",o:["«Предписание о служебных обязанностях верховного сановника»","«Надпись Уны»","Палермский камень","Кодекс Хаммурапи"],e:"Подробное описание должностных обязанностей визира."},
+{t:"s21",q:"Что, согласно «Надписи Уны», должен был делать правитель области?",o:["Дважды в год учитывать казённое имущество, организовывать каналы, суда, добычу материала для пирамид","Выбирать фараона","Командовать флотом","Писать поучения"],e:"Надпись XXV в. до н. э., каменная плита."},
+{t:"s21 dates",q:"В каком трактате изложена, пожалуй, первая в мире систематизированная табель о рангах (17 должностей)?",o:["Артхашастра, IV в. до н. э.","Законы Ману","Гуаньцзы","Кодекс Хаммурапи"],e:"С характеристиками и размером вознаграждения."},
+{t:"s21",q:"Как назывался надзиратель в древних школах писцов?",o:["«Владеющий хлыстом»","«Хранитель свитков»","«Отец учеников»","«Визир знаний»"],e:"Школы — «дома учения писанию» при храмах и дворцах."},
+{t:"s21",q:"Родиной какой формы правления Маршев называет Египет?",o:["Бюрократической абсолютной монархии","Демократии","Феодальной республики","Конституционной монархии"],e:"Из-за необходимости совместно регулировать Нил при сильной центральной власти."},
+{t:"s21",q:"Какой недоподъём Нила (от нормы ~5 м) был достаточен для голода?",o:["Один метр","Пять метров","Десять сантиметров","Три метра"],e:"Слишком бурное половодье тоже было гибельным."},
+{t:"s21",q:"Как именовались цари юга и севера Египта и какие короны они носили?",o:["Юг — «нисут», белая корона; север — «бисти», красная","Юг — «бисти», красная; север — «нисут», белая","Оба — «псхент»","Юг — «сепат», север — «хесп»"],e:"Соединённые короны — «псхент»; «сепат/хесп» — название номов."},
+{t:"s21 people",q:"Что обязал делать египтян фараон Амасис?",o:["Ежегодно объявлять правителю округа свой доход под страхом смертной казни","Строить пирамиды","Служить в армии","Платить дань Риму"],e:"По Геродоту, при Амасисе Египет достиг процветания."},
+{t:"s21",q:"На сколько времён года делили год египтяне?",o:["На три: наводнение, посев (зима), жатва (лето)","На четыре","На два","На двенадцать"],e:"Разлития Нила направляли всю жизнь земледельца."},
+{t:"s21 dates",q:"С какой династии и примерно с какого века начинается Древнее царство Египта?",o:["С третьей династии, около XXX в. до н. э.","С первой династии, около XL в. до н. э.","С шестой, около XXIII в. до н. э.","С восемнадцатой, около XVI в. до н. э."],e:"Строго централизованное бюрократическое государство."},
+{t:"s21",q:"Что содержит Палермский камень?",o:["Списки лет по царствованиям и событиям от раздельных царств до V династии","Законы Хаммурапи","План пирамиды","Табель о рангах"],e:"Другой важный памятник — Туринский папирус со списком царей."},
+{t:"s21 dates",q:"К какому времени относится появление египетского календаря?",o:["К концу V тыс. до н. э.","К XV в. до н. э.","К I тыс. до н. э.","К 20 тыс. до н. э."],e:"Результат земледельческих наблюдений неба."},
+{t:"s21 people",q:"Кто писал о родовых общинах: «Без солдат, жандармов и полицейских… — всё идёт своим установленным порядком»?",o:["Ф. Энгельс","К. Маркс","Геродот","Б. Тураев"],e:"О демократичности систем управления общин."},
+{t:"s21",q:"Чем было хозяйство первобытнообщинного общества?",o:["Бесприбыльным, «присваивающим»","Производящим и товарным","Рыночным","Плановым"],e:"Производящее хозяйство — первый признак цивилизации."},
+
+/* ---------- §2.3 ---------- */
+{t:"s23",q:"Какая особенность отличает древнекитайскую мысль от древнеегипетской и шумерской?",o:["Демифологичность и рациональность","Глубокая религиозность","Отказ от этики","Интерес только к войне"],e:"Она сосредоточена на проблемах общества, этики, государства и управления."},
+{t:"s23 dates",q:"Как называется эпоха VI–III вв. до н. э. в Китае?",o:["Чжаньго — эпоха «Борющихся царств»","Инь","Западное Чжоу","Хань"],e:"Власть династии Чжоу была номинальной; семь сильнейших владений."},
+{t:"s23 dates",q:"Когда Китай был объединён в централизованную империю Цинь?",o:["221 г. до н. э.","594 г. до н. э.","81 г. до н. э.","408 г. до н. э."],e:"Прогрессивный шаг в истории древнекитайского общества."},
+{t:"s23",q:"Какое царство НЕ входило в семь сильнейших владений эпохи Чжаньго?",o:["Лу","Цинь","Чу","Хань"],e:"Семь: Чу, Цинь, Чжао, Ци, Вэй, Янь, Хань. В Лу впервые ввели поземельный налог."},
+{t:"s23",q:"Кто занимал верхнюю ступень социальной иерархии Западного Чжоу?",o:["Ван — «единственный среди людей»","Чжухоу","Дафу","Ши"],e:"Ван — верховный собственник Поднебесной."},
+{t:"s23 dates",q:"Где и когда впервые введён налог на землю (по Сыма Цяню)?",o:["В царстве Лу в 594 г. до н. э.","В Цинь в 408 г. до н. э.","В Чу в 548 г. до н. э.","В Хань в 221 г. до н. э."],e:"Последним налог ввело царство Цинь — в 408 г. до н. э."},
+{t:"s23 people dates",q:"Годы жизни Конфуция?",o:["551–479 гг. до н. э.","479–400 гг. до н. э.","372–289 гг. до н. э.","313–238 гг. до н. э."],e:"479–400 — Мо-цзы, 372–289 — Мэн-цзы, 313–238 — Сюнь-цзы."},
+{t:"s23 people dates",q:"Кто перевёл «Лунь Юй» на русский язык в 1910 г.?",o:["П. С. Попов","А. И. Иванов","Г. Крил","Б. Тураев"],e:"Крупнейший российский китаист, служивший в миссии в Пекине. А. И. Иванов перевёл Хань Фэй-цзы (1912)."},
+{t:"s23",q:"Кого Конфуций называл «благородными мужами», управляющими верхами?",o:["Цзюнь-цзы","Сяо-жэнь","Чжухоу","Ши"],e:"Сяо-жэнь — «низкие», управляемые."},
+{t:"s23 people",q:"Кому принадлежат слова: «Тот, кто напрягает свой ум, управляет людьми… Таков всеобщий закон Поднебесной»?",o:["Мэн-цзы","Хань Фэй-цзы","Лао-цзы","Шан Яну"],e:"Мэн Кэ (372–289 гг. до н. э.), последователь Конфуция."},
+{t:"s23 people",q:"С чем Конфуций сравнивал мораль благородного мужа и низкого человека?",o:["С ветром и травой: трава наклоняется туда, куда дует ветер","С лодкой и волной","С колесницей и лошадью","С телом и руками"],e:"Лодка и волна — Сюнь-цзы; колесница и лошадь — Хань Фэй; тело и руки — Шэнь Пу-хай."},
+{t:"s23 people",q:"Без чего, по Конфуцию (ответ ученику Цзы-гуну), нет основы для государства?",o:["Без доверия","Без оружия","Без пищи","Без закона"],e:"Оружием и даже пищей можно поступиться, доверием — нельзя."},
+{t:"s23 people",q:"Какой ответ дал Конфуций на вопрос сановника Цзи Кан-цзы о правильном управлении?",o:["«Управлять — значит поступать правильно»","«Это когда ближние довольны, а дальние тянутся»","«Сначала сделай народ богатым»","«Никогда не отдавай невыполнимых приказов»"],e:"Второй вариант — ответ сановнику из царства Чу; Конфуций учитывал спрашивающего."},
+{t:"s23 people",q:"Какой совет дал Конфуций ученику Цзы-ся, занявшему административный пост?",o:["«Не спеши с решениями, не перегружайся мелочами»","«Наказывай чаще, чем награждай»","«Будь скрытен, как Небо»","«Сосредоточь народ на Едином»"],e:"Спешка мешает вникнуть в суть, мелочи — решить крупные проблемы."},
+{t:"s23",q:"Какие три способа завоевать доверие называет Конфуций?",o:["Забота и любовь к людям, следование ритуалу, самоусовершенствование","Награды, наказания, слежка","Законы, власть, искусство","Богатство, оружие, пища"],e:"«Если администратор не в состоянии усовершенствовать себя, как он выправит поведение других?»"},
+{t:"s23 people",q:"Кто основоположник даосизма, проповедовавший «недеяние» государя и возврат к патриархальной простоте?",o:["Лао-цзы","Мо-цзы","Шан Ян","Сюнь-цзы"],e:"Трактат «Дао дэ цзин»: дао — естественная закономерность."},
+{t:"s23 people",q:"Чей основной тезис — «всеобщая любовь и взаимная выгода»?",o:["Мо-цзы","Конфуция","Лао-цзы","Хань Фэй-цзы"],e:"Попытка этического обоснования равенства людей."},
+{t:"s23 people",q:"Кому принадлежит идея договорного происхождения государства, аналогичная модели Гоббса и Руссо?",o:["Мо-цзы","Шан Яну","Конфуцию","Гуань Чжуну"],e:"Люди избрали «сына неба» для «единого образца справедливости»."},
+{t:"s23 people",q:"Что, по Мо-цзы, нужно администратору: высокий престиж, оклад и большие полномочия. Для чего каждое?",o:["Престиж — для уважения, оклад — для доверия, полномочия — чтобы боялись","Престиж — для страха, оклад — для уважения, полномочия — для доверия","Все три — для богатства","Все три — для доверия народа"],e:"Это подтверждает «полицеизм» Мо-цзы."},
+{t:"s23 people",q:"Кто сказал: «Закон — это выражение любви к народу… Мудрый творит законы, а глупый ограничен ими»?",o:["Шан Ян","Конфуций","Мо-цзы","Сюнь-цзы"],e:"«Книга правителя области Шан», IV в. до н. э."},
+{t:"s23",q:"По Шан Яну, государство, добившееся сосредоточения народа на Едином на десять лет, будет могущественно…",o:["сто лет","десять лет","тысячу лет","вечно"],e:"1 год → 10 лет; 10 лет → 100; 100 лет → 1000; а кто могущественен тысячу лет — добьётся владычества в Поднебесной."},
+{t:"s23",q:"Что Шан Ян понимал под «Единым»?",o:["Земледелие и оборону страны","Торговлю и ремёсла","Учёность и красноречие","Ритуал и музыку"],e:"Красноречие, учёба, торговля, ремёсла отвлекали народ от Единого."},
+{t:"s23",q:"Какую систему ввёл Шан Ян для укрепления управления?",o:["Коллективную ответственность и круговую поруку (пятки и десятки доносчиков)","Экзамены для чиновников","Выборность правителя","Свободу торговли"],e:"Донос на сослуживца избавлял чиновника от наказания."},
+{t:"s23 people",q:"Кто известен как теоретик «шу» — искусства управления?",o:["Шэнь Пу-хай","Шан Ян","Гуань Чжун","Мэн-цзы"],e:"Министр царства Хань, 400–337 гг. до н. э."},
+{t:"s23 people",q:"Чьё управленческое правило: «Никогда не отдавайте невыполнимых приказов!»?",o:["Шэнь Пу-хая","Хань Фэй-цзы","Конфуция","Сюнь-цзы"],e:"Вместе с системой управления персоналом составляло «технологию власти»."},
+{t:"s23",q:"Что такое система «син-мин» Шэнь Пу-хая?",o:["Комплексная система управления персоналом: найм, экзамен, оценка, расстановка, контроль","Система налогов на соль","Ритуал почитания предков","Система круговой поруки"],e:"Кадры подбирались под дела, а не наоборот."},
+{t:"s23 people",q:"По Шэнь Пу-хаю, «мудрый правитель — тело, чиновники — его…»",o:["руки","глаза","ноги","сердце"],e:"Также: правитель — голос, чиновники — эхо; правитель — корень, чиновники — ветви."},
+{t:"s23 people",q:"Кто создал теорию регулирования цен на зерно через госзакупки в урожайные годы и продажу в неурожайные?",o:["Ли Куй","Гуань Чжун","Сан Хун-ян","Сыма Цянь"],e:"Разрыв урожаев доходил до 10 раз. Сегодня — «государственная интервенция зерна»."},
+{t:"s23",q:"Что означает идея «цин-чжун» в трактате «Гуаньцзы»?",o:["«Лёгкое–тяжёлое»: балансирование в управлении хозяйством страны","Равенство всех людей","Недеяние правителя","Почитание старших"],e:"На основе познания закономерностей общественной жизни."},
+{t:"s23",q:"Что трактат «Гуаньцзы» называет основой системы управления в государстве?",o:["Землю","Армию","Золото","Ритуал"],e:"Правительство — руководящее начало законности; рынок — мерило цен; золото — мера ресурсов."},
+{t:"s23 people",q:"Кто утверждал, что человек по натуре порочен, и призывал к воспитанию?",o:["Сюнь-цзы","Мэн-цзы","Конфуций","Лао-цзы"],e:"Последний чжоуский конфуцианец, 313–238 гг. до н. э."},
+{t:"s23 people",q:"Чей образ: «Правитель подобен лодке, а народ — волне; вода несёт лодку, но может и опрокинуть»?",o:["Сюнь-цзы","Хань Фэй-цзы","Мо-цзы","Шан Яна"],e:"Поэтому нужно управлять справедливо и выдвигать мудрых и способных."},
+{t:"s23",q:"Кого Сюнь-цзы считал главным советником правителя и практическим руководителем страны?",o:["Первого министра — сяна","Вана","Чжухоу","Сына неба"],e:"Сян назначал начальников служб, оценивал чиновников, докладывал правителю ежегодно."},
+{t:"s23 people",q:"У кого учился Хань Фэй-цзы?",o:["У Сюнь-цзы (вместе с Ли Сы)","У Конфуция","У Шан Яна","У Мо-цзы"],e:"Сильное влияние на него оказало и учение Лао-цзы о дао."},
+{t:"s23 dates",q:"Сколько глав и параграфов в трактате Хань Фэй-цзы и кто его перевёл на русский?",o:["20 глав, 55 параграфов; А. И. Иванов, 1912","55 глав, 20 параграфов; П. С. Попов, 1910","7 томов; Л. Штейн","12 глав; Г. Крил"],e:"Около 340 страниц в русском переводе."},
+{t:"s23",q:"Как погиб Хань Фэй-цзы?",o:["По ложному доносу был брошен в тюрьму в Цинь, где и погиб","Пал в битве","Умер от старости в Хань","Казнён по приказу Конфуция"],e:"Цинь Ши-хуан говорил, что готов пожертвовать жизнью ради встречи с автором."},
+{t:"s23",q:"С чем Хань Фэй-цзы сравнивал этические нормы конфуцианцев?",o:["С детской игрой в приготовление пищи из песка","С ветром","С лодкой","С крыльями ворона"],e:"Годны лишь для игры в слова, но не для управления."},
+{t:"s23",q:"Как Хань Фэй-цзы относился к вере в духов?",o:["«Кто возлагает надежду на духов, тот пренебрегает законом»","Считал её основой управления","Считал её частью искусства управления","Советовал советоваться с духами перед законом"],e:"Судьба тоже роли не играет: «благосостояние приносят труд и бережливость»."},
+{t:"s23",q:"В чём Хань Фэй-цзы НЕ соглашался с Шан Яном?",o:["Шан Ян умалчивал об искусстве управления и был сторонником ответственного кабинета, а не абсолютной монархии","Шан Ян отрицал законы","Шан Ян был против земледелия","Шан Ян призывал к добродетели Конфуция"],e:"Хань Фэй происходил из правящего дома и защищал интересы правителя."},
+{t:"s23",q:"Как Хань Фэй-цзы образно описывает государство и положение правителя?",o:["Государство — колесница правителя, положение — его лошадь","Государство — лодка, народ — волна","Государство — тело, чиновники — руки","Государство — семья, правитель — отец"],e:"Без искусства управления правителю не избежать беспорядка."},
+{t:"s23",q:"С чем Хань Фэй-цзы сравнивал силу власти правителя?",o:["С когтями и зубами тигра и пантеры","С ветром, клонящим траву","С водой, несущей лодку","С корнем дерева"],e:"Утратив их, правитель становится похожим на беззубого тигра."},
+{t:"s23",q:"Что, по Хань Фэй-цзы, должно преобладать в управлении — награды или наказания?",o:["Наказания: «обилие наград — основание смуты»","Награды: они рождают усердие","Строго поровну","Ни то, ни другое — только ритуал"],e:"«Когда наказаний больше, народ спокоен; если награды обильны, рождается коварство»."},
+{t:"s23",q:"Какой принцип НЕ входит в 8 принципов «искусства управления» по Хань Фэй-цзы?",o:["Опираться на рекомендации мудрецов-конфуцианцев","Не уступать власть другим","Быть скрытным, не разоблачать себя","В наказаниях проявлять непреклонность, в поощрениях — умеренность"],e:"Среди восьми: следить друг за другом, считать всех дурными, не считаться с моралью, одурманивать народ, неразборчивость в средствах."},
+{t:"s23",q:"Как Хань Фэй-цзы образно описывал «приручение» чиновников?",o:["Как выкармливание ворона с подрезанными крыльями","Как дрессировку тигра","Как полив травы","Как управление колесницей"],e:"Чиновники, получающие содержание от правителя, не могут не преклоняться перед ним."},
+{t:"s23",q:"Какой взгляд Хань Фэй-цзы на отношения правителя и чиновников Маршев называет новым и радикальным?",o:["Отношения покупателя и продавца: чиновники продают силы и жизнь, правитель покупает их за титулы и жалованье","Отношения отца и сына","Отношения учителя и ученика","Отношения бога и жреца"],e:"Взгляд на чиновника как на орудие — старый, рабовладельческий."},
+{t:"s23",q:"Как Хань Фэй-цзы относился к совмещению должностей?",o:["Считал недопустимым: без совмещения способности растут и нет споров","Требовал совмещать как можно больше","Разрешал только знатным","Относился безразлично"],e:"Также недопустимо вмешательство служащих в дела друг друга."},
+{t:"s23",q:"Какие три предложения Хань Фэй-цзы представил вану царства Хань?",o:["Избавиться от бездарных, реформировать административную службу, усилить наказания","Отменить законы, ввести ритуал, наградить учёных","Объединиться с Цинь, сократить армию, снизить налоги","Назначать по знатности, ввести экзамены, построить амбары"],e:"Предложения были отвергнуты."},
+{t:"s23",q:"По какому принципу Хань Фэй-цзы предлагал назначать чиновников?",o:["По способностям и деловым качествам, без учёта социального происхождения","По знатности рода","По рекомендациям","По возрасту"],e:"Хоть повар, хоть пастух — если есть способности, выдвигать на должности."},
+{t:"s23 dates",q:"Когда состоялся «Спор о соли и железе» между легистами и конфуцианцами?",o:["81 г. до н. э.","221 г. до н. э.","594 г. до н. э.","II в. н. э."],e:"Представители правительства во главе с легистом Сан Хун-яном против «учёных мужей»."},
+{t:"s23",q:"Какой фактор НЕ входит в четыре фактора развития китайской управленческой мысли VIII–III вв. до н. э.?",o:["Влияние греческой философии","Политические","Научно-технологические","Общекультурные"],e:"Четыре фактора: политические, экономические, научно-технологические, общекультурные."},
+{t:"s23",q:"Из какого рода происходил Хань Фэй-цзы и чем отличался?",o:["Из знатного княжеского рода владения Хань; был заикой, но писал прекрасно","Из семьи крестьян Цинь; был блестящим оратором","Из купцов Чу; был торговцем солью","Из рода Конфуция; был жрецом"],e:"Принадлежность к правящему дому объясняет его защиту интересов правителя."},
+
+/* ---------- §4.1 ---------- */
+{t:"s41 people",q:"В каком сочинении есть глава «О росах, отправляющихся с моноксилами из России в Константинополь»?",o:["Константин VII Багрянородный, «Об управлении империей»","Лев Диакон, «История»","Ибн-Фадлан, «Записка»","Повесть временных лет"],e:"Подробно описан путь «из варяг в греки»."},
+{t:"s41 people",q:"Как Ключевский оценивал сведения иностранцев о Руси до появления летописей?",o:["«Отдельные подробности, не складывающиеся ни во что цельное»","«Самый надёжный источник»","«Полное повествование»","«Сплошной вымысел»"],e:"С появлением летописей сведения стали цельными и структурированными."},
+{t:"s41 dates",q:"Какой из древнейших списков Начальной летописи датирован 1377 г.?",o:["Лаврентьевский","Ипатьевский","Московский","Никоновский"],e:"Ипатьевский — конец XIV — начало XV в.; Московский — XVI; Никоновский — XVI–XVII вв."},
+{t:"s41 dates",q:"Когда создана Археологическая комиссия и с какого года издаётся Полное собрание русских летописей?",o:["1834 и 1841","1772 и 1801","1861 и 1881","1700 и 1725"],e:"Цель — издание памятников древней русской истории."},
+{t:"s41",q:"Кто вёл летописи в Московском государстве?",o:["Специально обученные приказные дьяки","Только монахи","Иностранные послы","Купцы"],e:"Сначала летописание было делом духовенства, затем княжеских дворов."},
+{t:"s41",q:"Кого в удельный период называли «князьями-собирателями»?",o:["Тех, кто лучше хозяйничал и устраивал свой удел","Тех, кто стремился к единовластию","Сборщиков дани для Орды","Князей-коллекционеров"],e:"Хозяйственные умения князей зависели и от «посадского», «промышленного» населения."},
+{t:"s41 people",q:"Какой князь, по Галицко-Волынской летописи, строил города (например, Львов) и был покровителем промышленности?",o:["Даниил Галицкий","Ярослав Мудрый","Иван Калита","Владимир Мономах"],e:"Он приглашал умелых ремесленников и торговых людей."},
+{t:"s41",q:"Какой документ упоминает, возможно, первую на Руси предпринимательскую организацию — Иванскую купеческую корпорацию?",o:["Устав церкви Ивана на Опоках («Рукописание князя Всеволода Мстиславовича»)","Русская Правда","Судебник 1497 г.","Устав Владимира о десятинах"],e:"Корпорация действовала на правах самоуправления в Новгороде."},
+{t:"s41",q:"Каким был вступительный взнос в Иванскую купеческую корпорацию?",o:["50 гривен серебра (около 10 кг серебра) и взнос сукном","10 гривен золота","25 гривен серебра","1000 гривен"],e:"Половину — 25 гривен — «положить в святыи Иван», то есть в церковь."},
+{t:"s41",q:"Кто такие «пошлые купцы»?",o:["Исконные, наиболее состоятельные купцы","Купцы, платившие пошлину","Иностранные торговцы","Мелкие лавочники"],e:"«Пошлые» — исконные."},
+{t:"s41",q:"Кто руководил Иванской купеческой корпорацией?",o:["Два выборных старосты от купечества и один — от житьих и чёрных людей","Князь и епископ","Тысяцкий","Совет бояр"],e:"Бояре и посадские не имели права вмешиваться в деятельность центра."},
+{t:"s41 dates",q:"При ком началась и при ком завершилась централизация Русского государства?",o:["Началась при Иване Калите (1325–1340), завершилась при Иване IV (1530–1584)","Началась при Ярославе, завершилась при Петре I","Началась при Владимире, завершилась при Иване III","Началась при Иване III, завершилась при Алексее Михайловиче"],e:"Особенно активный процесс — при Иване III (1462–1505)."},
+{t:"s41 dates",q:"Какие важнейшие источники ИУМ периода централизации называет Маршев?",o:["Судебники 1497 и 1550 гг., акты местного управления, Стоглав 1551 г.","Соборное уложение 1649 г.","Табель о рангах 1722 г.","Генеральный регламент 1720 г."],e:"Стоглав — решения церковно-земского собора в Москве."},
+{t:"s41",q:"Какие города служили политическими центрами Руси в IX–XII вв.?",o:["Волостные города-государства: Киев, Чернигов, Переяславль, Смоленск, Владимир","Москва и Тверь","Новгород и Псков только","Казань и Астрахань"],e:"Крупные торговые города и волости."},
+{t:"s41 dates",q:"С какого века стал важен торговый путь «из варяг в греки»?",o:["С IX в.","С VI в.","С XII в.","С XIV в."],e:"В VIII–X вв. велась и большая торговля с арабами по Волге."},
+{t:"s41",q:"Как назывались два способа сбора налогов с подвластных племён?",o:["Повоз (привоз в Киев) и полюдье (объезд князем)","Десятина и оброк","Барщина и ясак","Мыт и тамга"],e:"По сочинению Константина Багрянородного «О народах»."},
+{t:"s41",q:"Что на Руси, по Маршеву, стало аналогом оросительных систем Древнего Востока как «общего дела»?",o:["Охрана торговых путей, оборона степных границ, строительство городов","Строительство храмов","Осушение болот","Создание флота"],e:"Это и было источником управленческих идей."},
+{t:"s41 people",q:"Чьи слова: «Худо, что мало городов вокруг Киева»?",o:["Князя Владимира","Князя Олега","Ярослава Мудрого","Святослава"],e:"После этого он строил города по Десне, Трубежу, Стугне, Суле."},
+{t:"s41 people",q:"Кто писал о Киеве начала XI в.: около 400 церквей и 8 рынков?",o:["Титмар Мерзебургский","Адам Бременский","Константин Багрянородный","Лев Диакон"],e:"Адам Бременский называл Киев соперником Константинополя."},
+{t:"s41 dates",q:"Сколько церквей, по летописи, сгорело в Киеве при пожаре 1017 г.?",o:["До 700","400","8","3000"],e:"Иностранцы склонны были преувеличивать богатство Киева."},
+{t:"s41",q:"Сколько торговых договоров с греками заключили Олег, Игорь и Святослав?",o:["Два — Олег, по одному — Игорь и Святослав","По одному каждый","Три — Олег, ни одного — Святослав","Только Игорь"],e:"Тексты договоров — ещё один источник управленческой мысли."},
+{t:"s41",q:"Сколько длился ежегодный торговый съезд русских купцов в Царьграде?",o:["Шесть месяцев","Один месяц","Год","Три дня"],e:"По договору Игоря оставаться на зиму запрещалось."},
+{t:"s41",q:"Где останавливались русские послы и гости в Константинополе?",o:["В монастыре св. Маманта","В императорском дворце","В Софийском соборе","На кораблях"],e:"Пользовались даровым кормом и даровой баней."},
+{t:"s41",q:"В каком порядке раздавалась месячина русским купцам в Царьграде?",o:["По старшинству русских городов: киевским, затем черниговским, переяславским, смоленским…","По алфавиту","По жребию","По объёму товара"],e:"Торговые поездки рассматривались как посольства союзного двора."},
+{t:"s41",q:"Что русские купцы вывозили в Византию?",o:["Меха, мёд, воск, челядь","Шелк и вина","Золото и овощи","Зерно и соль"],e:"Взамен — паволоки (шелковые ткани), золото, вина, овощи."},
+{t:"s41",q:"Как называлась система управления Киевского государства, выросшая из военной организации?",o:["Десятичная система","Дворцово-вотчинная система","Приказная система","Губернская система"],e:"Тысячи, сотни, десятки; тысяцкий, сотские, десятские."},
+{t:"s41",q:"Кого летопись называет «старцами градскими»?",o:["Выборную военно-правительственную старшину городов","Монахов","Иностранных купцов","Княжеских детей"],e:"Вместе с боярами они составляли русскую аристократию и сидели в думе князя."},
+{t:"s41",q:"Кто считался первым лицом финансового управления в княжестве?",o:["Дворский (дворецкий)","Тысяцкий","Волостель","Посадник"],e:"Ему подчинялись казначей, ключники, тиуны, посельские."},
+{t:"s41",q:"Как называлось содержание бояр-наместников и волостелей за счёт населения?",o:["Кормление","Полюдье","Месячина","Десятина"],e:"Местное управление служило скорее содержанию княжеских слуг."},
+{t:"s41 dates",q:"Какая система управления сменила десятичную в X в. (по Ключевскому)?",o:["Дворцово-вотчинная","Приказная","Коллегиальная","Вечевая"],e:"Государство управлялось как феодальная вотчина великого князя."},
+{t:"s41 people",q:"Сколько гривен ежегодно платил Ярослав отцу, когда правил Новгородом?",o:["2 тысячи гривен — потом перестал","200 гривен","50 гривен","10 тысяч гривен"],e:"Так же платили все посадники новгородские."},
+{t:"s41 people",q:"Кому Ярослав оставил престол в своём завещании?",o:["Трём старшим сыновьям","Всем пятерым сыновьям","Одному старшему","Младшему"],e:"Норма «трёх старших братьев» стала одной из основ местничества."},
+{t:"s41",q:"Что характеризует подвижной очередной порядок княжеского владения?",o:["Князья переходили из волости в волость по очереди старшинства: лестница лиц соответствовала лестнице областей","Удел передавался строго от отца к сыну","Князей выбирало вече","Все владели всем одновременно и не перемещались"],e:"Великий князь — «названный отец своей братии»."},
+{t:"s41 dates",q:"Что решил Любечский съезд князей 1097 г.?",o:["«Каждый пусть управляет своей вотчиной»","Принять христианство","Избрать единого царя","Перенести столицу во Владимир"],e:"Съезд созван по инициативе Святополка II после усобиц и половецких набегов."},
+{t:"s41",q:"Какие органы управления были характерны для Новгорода и Пскова?",o:["Вече и оспода (совет господ); заметно влияние владыки","Боярская дума и приказы","Сенат и коллегии","Тысяча и сотни только"],e:"Это феодальные республики в аристократическом варианте."},
+{t:"s41",q:"Какую стадию развития, по Маршеву, миновала Россия?",o:["Рабовладельческую","Феодальную","Первобытнообщинную","Родовую"],e:"Россия перешла от первобытнообщинного строя к феодальному."},
+{t:"s41 people",q:"Кого Ключевский называет самым ранним типом русского народного хозяйства?",o:["Лесного зверолова и бортника","Пахаря","Купца","Кузнеца"],e:"Меха, мёд и воск — главные статьи русского вывоза."},
+{t:"s41",q:"Что регулировал «Устав князя Ярослава о мостех»?",o:["Мощение торговых магистралей Новгорода и дорог к пристаням и Торгу","Церковные суды","Десятину","Наследование престола"],e:"Не связан с церковной юрисдикцией."},
+{t:"s41",q:"Какую модель управления, по Маршеву, Русь переняла из Византии вместе с христианством?",o:["Модель полицейского государства (благополучие и безопасность граждан)","Модель правового государства","Модель культурного государства","Модель республики"],e:"На князя переносилось понятие о государе, поставленном Богом для внутреннего порядка."},
+{t:"s41",q:"С какими правдами Маршев сравнивает Русскую Правду?",o:["С германскими (варварскими): Салической, Рипуарской, Бургундской","С кодексом Хаммурапи","С Артхашастрой","С Законами Ману"],e:"Русская Правда — свод правовых основ госуправления Киевской Руси."},
+{t:"s41",q:"Как по договору Игоря Русь обязывалась помогать Византии?",o:["Не пускать Чёрных болгар в Крым «пакостить в стране Корсунской»","Платить дань золотом","Строить корабли для греков","Отдать Киев под управление греков"],e:"Русь была платной союзницей Византии."},
+{t:"s41",q:"С какого времени начинается политический упадок Киева?",o:["Со второй половины XI в.","С IX в.","С XIV в.","С 1097 г. ровно"],e:"Во второй половине XII в. Киев перестал быть стольным городом."}
+];
+QS.forEach((q,i)=>q.id=i);
+
+const PARAS=[
+ {k:"s12",n:"§1.2",title:"Организация и управление организацией",sub:"определения, модели, 7 атрибутов, банкротства"},
+ {k:"s14",n:"§1.4",title:"ИУИ как основы науки управления",sub:"эксперимент, классификация, три способа"},
+ {k:"s16",n:"§1.6",title:"Специфические проблемы ИУМ",sub:"идиографичность, факторы, источники"},
+ {k:"s17",n:"§1.7",title:"Основные течения управленческой мысли",sub:"полицейское → правовое → культурное"},
+ {k:"s21",n:"§2.1",title:"Истоки и источники управленческой мысли",sub:"цивилизация, Египет, документы"},
+ {k:"s23",n:"§2.3",title:"Управление в Древнем Китае",sub:"Конфуций, Шан Ян, Хань Фэй-цзы"},
+ {k:"s41",n:"§4.1",title:"Истоки управленческой мысли в России",sub:"летописи, договоры, порядок владения"}];
+const CROSS=[
+ {k:"dates",n:"ДАТЫ",title:"Даты и цифры",sub:"годы, века, проценты"},
+ {k:"people",n:"ЛИЦА",title:"Кто сказал и кто написал",sub:"персоны и цитаты"},
+ {k:"lec",n:"ЛЕКЦ",title:"Вопросы как на лекции",sub:"6 вариантов, разбор «почему»"}];
+const LETTERS=["А","Б","В","Г","Д","Е"];
+
+/* ---------- storage ---------- */
+function ld(k,d){try{const v=localStorage.getItem("ium_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem("ium_"+k,JSON.stringify(v))}catch(e){}}
+let user=ld("user",null), testTime=ld("testTime",null), testAt=testTime?targetFrom(testTime):null;
+let stats=ld("stats",{}); // id -> 1 (right last) / 0 (wrong last)
+let mistakes=new Set(ld("mist",[]));
+let jokeDone=ld("jokeDone",false);
+let ticketRes=ld("tickets",{});
+
+const $=s=>document.querySelector(s);
+const show=id=>{document.querySelectorAll(".screen").forEach(s=>s.hidden=s.id!==id);window.scrollTo(0,0)};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+/* placeholder portrait */
+const PH="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250"><rect width="200" height="250" fill="#c9d3e3"/><circle cx="100" cy="95" r="44" fill="#8a99b3"/><path d="M22 250c6-62 42-92 78-92s72 30 78 92z" fill="#8a99b3"/><text x="100" y="112" font-size="54" text-anchor="middle" fill="#ffffff" font-family="Arial">?</text></svg>');
+const TEACHER="data:image/jpeg;base64,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";
+const photoSrc=()=>TEACHER;
+
+/* ---------- name / time gates ---------- */
+/* тест — суббота, 24 октября 2026, время по МСК (UTC+3) */
+function targetFrom(timeStr){const [h,m]=timeStr.split(":").map(Number);return Date.UTC(2026,9,24,h-3,m,0)}
+$("#nameNext").onclick=()=>{
+  const n=$("#inName").value.trim(),s=$("#inSurname").value.trim();
+  if(!n||!s){$("#nameErr").textContent="Укажите и имя, и фамилию.";return}
+  $("#nameErr").textContent="";user={n,s};sv("user",user);
+  if(testTime){$("#inTime").value=testTime}
+  show("sTime");
+};
+["#inName","#inSurname"].forEach(sel=>$(sel).addEventListener("keydown",e=>{if(e.key==="Enter")$("#nameNext").click()}));
+$("#m308").onclick=()=>{$("#inTime").value="20:30";$("#inTime").focus()};
+$("#timeBack").onclick=()=>show("sName");
+$("#timeNext").onclick=()=>{
+  const t=$("#inTime").value;
+  if(!t){$("#timeErr").textContent="Введите время начала теста, например 20:30.";return}
+  $("#timeErr").textContent="";testTime=t;sv("testTime",t);testAt=targetFrom(t);
+  enterApp();
+};
+$("#editBtn").onclick=()=>{
+  if(user){$("#inName").value=user.n;$("#inSurname").value=user.s}
+  stopExamTimer();show("sName");
+};
+
+/* ---------- countdown ---------- */
+function pad(n){return String(n).padStart(2,"0")}
+function tick(){
+  if(!testAt)return;
+  const box=$("#countBox"),diff=testAt-Date.now();
+  box.hidden=false;box.classList.remove("soon","live");
+  const dstr="суббота, "+testTime+" МСК";
+  if(diff>0){
+    const s=Math.floor(diff/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),sec=s%60;
+    $("#countT").textContent=(d?d+" д ":"")+pad(h)+":"+pad(m)+":"+pad(sec);
+    $("#countLbl").textContent="До теста";
+    if(diff<3600000)box.classList.add("soon");
+  }else if(diff>-90*60000){
+    box.classList.add("live");$("#countLbl").textContent="Тест начался в "+testTime+" МСК";$("#countT").textContent="Идёт";
+  }else{
+    $("#countLbl").textContent="Тест был "+dstr;$("#countT").textContent="Прошёл";
+  }
+}
+setInterval(tick,1000);
+
+/* ---------- menu ---------- */
+function secStats(k){
+  const list=QS.filter(q=>q.t.split(" ").includes(k));
+  const ok=list.filter(q=>stats[q.id]===1).length;
+  return {n:list.length,ok};
+}
+function renderMenu(){
+  $("#helloName").textContent=user.n+" "+user.s;
+  $("#who").textContent=user.n+" "+user.s+" · М308";
+  const okAll=QS.filter(q=>stats[q.id]===1).length;
+  $("#totalProg").innerHTML=`<span>Освоено ${okAll} из ${QS.length}</span><span class="meter"><i style="width:${okAll/QS.length*100}%"></i></span>`;
+  $("#mistD").textContent=mistakes.size?`Сейчас в списке: ${mistakes.size}. Верный ответ убирает вопрос.`:"Пока ошибок нет — отличный знак.";
+  $("#marD").textContent=`Все ${QS.length} вопросов подряд в случайном порядке.`;
+  const row=s=>{const st=secStats(s.k);return `<button class="sec" data-sec="${s.k}"><span class="num">${s.n}</span><span class="nm">${s.title}<small>${s.sub}</small></span><span class="prog">${st.ok}/${st.n}<span class="meter"><i style="width:${st.n?st.ok/st.n*100:0}%"></i></span></span></button>`};
+  $("#secParas").innerHTML=PARAS.map(row).join("");
+  $("#secCross").innerHTML=CROSS.map(row).join("");
+  $("#tickets").innerHTML=TICKETS.map((t,i)=>{const r=ticketRes[i];const cls=r==null?"":(r<=2?"done":"fail");return `<button class="ticket ${cls}" data-ticket="${i}">${i+1}<small>${r==null?"билет":"ошибок: "+r}</small></button>`}).join("");
+  document.querySelectorAll("[data-sec]").forEach(b=>b.onclick=()=>{const k=b.dataset.sec;const all=[...PARAS,...CROSS].find(s=>s.k===k);startQuiz({mode:"sec",title:all.n+" · "+all.title,ids:shuffle(QS.filter(q=>q.t.split(" ").includes(k)).map(q=>q.id))})});
+  document.querySelectorAll("[data-ticket]").forEach(b=>b.onclick=()=>{const i=+b.dataset.ticket;startQuiz({mode:"ticket",ticket:i,title:"Билет №"+(i+1),ids:TICKETS[i]})});
+}
+/* стабильные билеты по 15 вопросов */
+function seeded(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646}}
+const TICKETS=(()=>{const r=seeded(308);const ids=QS.map(q=>q.id);for(let i=ids.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]]}const out=[];for(let i=0;i<ids.length;i+=15)out.push(ids.slice(i,i+15));if(out.length>1&&out[out.length-1].length<8){const last=out.pop();out[out.length-1]=out[out.length-1].concat(last)}return out})();
+
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{
+  const g=b.dataset.go;
+  if(g==="theory")return openTheory();
+  if(g==="exam")return startQuiz({mode:"exam",title:"Экзамен",ids:shuffle(QS.map(q=>q.id)).slice(0,20),limit:20*60});
+  if(g==="lec")return startQuiz({mode:"sec",title:"Как на лекции",ids:shuffle(QS.filter(q=>q.t.includes("lec")).map(q=>q.id))});
+  if(g==="marathon")return startQuiz({mode:"marathon",title:"Марафон",ids:shuffle(QS.map(q=>q.id))});
+  if(g==="mist"){if(!mistakes.size){$("#mistD").textContent="Ошибок нет. Решите любой раздел, и сюда попадут вопросы с ошибками.";return}
+    return startQuiz({mode:"mist",title:"Мои ошибки",ids:shuffle([...mistakes])})}
+});
+let resetArm=false;
+$("#resetBtn").onclick=()=>{
+  if(!resetArm){resetArm=true;$("#resetBtn").textContent="Точно сбросить?";$("#resetMsg").textContent="Нажмите ещё раз — ошибки, статистика и билеты обнулятся (вопрос-сюрприз тоже вернётся).";return}
+  stats={};mistakes=new Set();ticketRes={};jokeDone=false;sv("stats",stats);sv("mist",[]);sv("tickets",{});sv("jokeDone",false);
+  resetArm=false;$("#resetBtn").textContent="Сбросить прогресс";$("#resetMsg").textContent="Прогресс сброшен.";renderMenu();
+};
+
+/* ---------- quiz ---------- */
+let S=null, examTimer=null;
+function stopExamTimer(){if(examTimer){clearInterval(examTimer);examTimer=null}}
+function startQuiz(cfg){
+  const items=cfg.ids.map(id=>({id,perm:shuffle(QS[id].o.map((_,i)=>i)),chosen:null}));
+  if(!jokeDone)items.unshift({joke:true,perm:shuffle([0,1,2,3]),chosen:null});
+  S={...cfg,items,idx:0,start:Date.now()};
+  $("#qTitle").textContent=cfg.title;
+  stopExamTimer();
+  if(cfg.limit){$("#qTimer").hidden=false;examTimer=setInterval(()=>{const left=cfg.limit-Math.floor((Date.now()-S.start)/1000);if(left<=0){stopExamTimer();finish(true);return}$("#qTimer").textContent=pad(Math.floor(left/60))+":"+pad(left%60)},500)}
+  else $("#qTimer").hidden=true;
+  show("sQuiz");renderQ();
+}
+const JOKE_OPTS=["Иван Владимирович Дволучанский","Фредерик Тейлор","Хань Фэй-цзы","Анри Файоль"];
+function renderGrid(){
+  $("#qGrid").innerHTML=S.items.map((it,i)=>{let c="";if(it.chosen!=null){const ok=it.joke?it.perm[it.chosen]===0:it.perm[it.chosen]===0;c=ok?"ok":"bad"}return `<button class="tile ${c} ${i===S.idx?"cur":""}" data-i="${i}" aria-label="Вопрос ${it.joke?"сюрприз":i+1}">${it.joke?"?":(jokeOffset(i))}</button>`}).join("");
+  $("#qGrid").querySelectorAll(".tile").forEach(b=>b.onclick=()=>{S.idx=+b.dataset.i;renderQ()});
+  const cur=$("#qGrid .cur");if(cur)cur.scrollIntoView({block:"nearest",inline:"center"});
+}
+function jokeOffset(i){return S.items[0].joke?i:i+1}
+function renderQ(){
+  renderGrid();
+  const it=S.items[S.idx];
+  let html="";
+  if(it.joke){
+    html=`<div class="head"><span class="tag">Вопрос-сюрприз</span></div><div class="qtext">Кто на фотографии?</div><img class="photo" src="${photoSrc()}" alt="Фотография преподавателя">`;
+    html+=`<div class="opts">`+it.perm.map((oi,pi)=>optHtml(JOKE_OPTS[oi],pi,it,oi===0)).join("")+`</div>`;
+  }else{
+    const q=QS[it.id];const tags=q.t.split(" ");
+    const para=PARAS.find(p=>tags.includes(p.k));
+    html=`<div class="head">${para?`<span class="tag">Вопрос (${para.n})</span>`:""}${tags.includes("lec")?'<span class="tag lec">как на лекции</span>':""}${tags.includes("dates")?'<span class="tag">дата</span>':""}</div><div class="qtext">${esc(q.q)}</div>`;
+    html+=`<div class="opts">`+it.perm.map((oi,pi)=>optHtml(q.o[oi],pi,it,oi===0)).join("")+`</div>`;
+    if(it.chosen!=null){const ok=it.perm[it.chosen]===0;
+      html+=`<div class="expl ${ok?"ok":"bad"}"><b>${ok?"Верно":"Неверно. Правильный ответ: "+LETTERS[it.perm.indexOf(0)]}</b><p><b style="display:inline;text-transform:none;letter-spacing:0;color:var(--ink)">Почему это правильно: </b>${esc(q.e)}</p></div>`}
+  }
+  $("#qCard").innerHTML=html;
+  $("#qCard").querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(+b.dataset.p));
+  $("#qPrev").disabled=S.idx===0;
+  const last=S.idx===S.items.length-1;
+  $("#qNext").textContent=last?"Завершить":"Далее";
+}
+function optHtml(text,pi,it,isRight){
+  let cls="";if(it.chosen!=null){if(isRight)cls="right";else if(pi===it.chosen)cls="wrong"}
+  return `<button class="opt ${cls}" data-p="${pi}" ${it.chosen!=null?"disabled":""}><span class="L">${LETTERS[pi]}</span><span>${esc(text)}</span></button>`;
+}
+function answer(pi){
+  const it=S.items[S.idx];if(it.chosen!=null)return;it.chosen=pi;
+  const ok=it.perm[pi]===0;
+  if(it.joke){jokeDone=true;sv("jokeDone",true);overlay(ok);renderQ();return}
+  stats[it.id]=ok?1:0;sv("stats",stats);
+  if(ok)mistakes.delete(it.id);else mistakes.add(it.id);sv("mist",[...mistakes]);
+  renderQ();
+  if(S.mode==="exam"){const errs=S.items.filter(x=>!x.joke&&x.chosen!=null&&x.perm[x.chosen]!==0).length;if(errs>2){/* продолжаем, но итог будет «не сдан» */}}
+}
+function overlay(ok){
+  const ov=$("#ov");ov.className="ov "+(ok?"green":"red");
+  ov.innerHTML=ok?`<div><h2>Вы адекватный</h2><p>Иван Владимирович узнан. Можно переходить к настоящим вопросам.</p><button class="btn" id="ovBtn">К вопросам</button></div>`
+                 :`<div><h2>Вы не адекватный</h2><p>Это был Иван Владимирович Дволучанский. Запомните его — он принимает тест.</p><button class="btn" id="ovBtn">Исправиться и продолжить</button></div>`;
+  ov.hidden=false;$("#ovBtn").focus();
+  $("#ovBtn").onclick=()=>{ov.hidden=true;if(S.idx<S.items.length-1){S.idx++;renderQ()}};
+}
+$("#qPrev").onclick=()=>{if(S.idx>0){S.idx--;renderQ()}};
+$("#qNext").onclick=()=>{
+  if(S.idx<S.items.length-1){S.idx++;renderQ();return}
+  const unanswered=S.items.filter(x=>x.chosen==null).length;
+  if(unanswered&&!S.confirmEnd){S.confirmEnd=true;$("#qNext").textContent=`Без ${unanswered} отв. — завершить?`;return}
+  finish(false);
+};
+$("#qExit").onclick=()=>{stopExamTimer();renderMenu();show("sMenu")};
+function finish(timeout){
+  stopExamTimer();
+  const real=S.items.filter(x=>!x.joke);
+  const right=real.filter(x=>x.chosen!=null&&x.perm[x.chosen]===0).length;
+  const wrong=real.filter(x=>x.chosen!=null&&x.perm[x.chosen]!==0);
+  const skipped=real.filter(x=>x.chosen==null);
+  const errs=wrong.length+skipped.length;
+  let verdict="",vcls="";
+  if(S.mode==="exam"||S.mode==="ticket"){const pass=errs<=2&&!timeout;verdict=pass?"Сдано":"Не сдано"+(timeout?" — время вышло":"");vcls=pass?"ok":"bad"}
+  else{const p=real.length?right/real.length:0;verdict=p>=.9?"Отлично, тема освоена":p>=.7?"Хорошо, повторите ошибки":"Стоит перечитать теорию";vcls=p>=.7?"ok":"bad"}
+  if(S.mode==="ticket"){ticketRes[S.ticket]=errs;sv("tickets",ticketRes)}
+  const mins=Math.round((Date.now()-S.start)/60000);
+  let html=`<div class="qtop"><span class="ttl display" style="font-size:18px">${esc(S.title)} — итог</span><button class="iconbtn" id="resMenu">В меню</button></div>
+  <div class="score"><div class="big mono">${right}/${real.length}</div><div><div class="verdict ${vcls}">${verdict}</div><div class="muted">Ошибок: ${wrong.length}${skipped.length?`, без ответа: ${skipped.length}`:""} · ${mins} мин</div></div></div>`;
+  const bad=[...wrong,...skipped];
+  if(bad.length){html+=`<div class="sechead" style="margin:6px 0 0">Разбор ошибок</div><div class="mlist">`+bad.map(x=>{const q=QS[x.id];return `<div class="mitem"><div>${esc(q.q)}</div><div class="a">✓ ${esc(q.o[0])}</div><div class="muted" style="font-size:14px;margin-top:4px">${esc(q.e)}</div></div>`}).join("")+`</div>`}
+  html+=`<div class="row"><button class="btn" id="resAgain">Пройти ещё раз</button>${mistakes.size?'<button class="btn ghost" id="resMist">Работа над ошибками</button>':""}</div>`;
+  $("#resBody").innerHTML=html;show("sRes");
+  const cfg={mode:S.mode,title:S.title,ticket:S.ticket,limit:S.limit,ids:S.mode==="exam"?shuffle(QS.map(q=>q.id)).slice(0,20):(S.mode==="ticket"?S.items.filter(x=>!x.joke).map(x=>x.id):shuffle(real.map(x=>x.id)))};
+  $("#resMenu").onclick=()=>{renderMenu();show("sMenu")};
+  $("#resAgain").onclick=()=>startQuiz(cfg);
+  if($("#resMist"))$("#resMist").onclick=()=>startQuiz({mode:"mist",title:"Мои ошибки",ids:shuffle([...mistakes])});
+}
+
+/* ---------- theory ---------- */
+const TH=[...document.querySelectorAll("#theoryStore > div")].map(d=>({k:d.dataset.k,n:d.dataset.n,html:d.innerHTML}));
+function openTheory(k){
+  k=k||ld("thK","t12");if(!TH.find(t=>t.k===k))k="t12";sv("thK",k);
+  $("#thToc").innerHTML=TH.map(t=>`<button class="${t.k===k?"on":""}" data-k="${t.k}">${t.n}</button>`).join("");
+  $("#thSel").innerHTML=TH.map(t=>`<option value="${t.k}" ${t.k===k?"selected":""}>${t.n}</option>`).join("");
+  $("#thBody").innerHTML=TH.find(t=>t.k===k).html;
+  $("#thToc").querySelectorAll("button").forEach(b=>b.onclick=()=>{openTheory(b.dataset.k);window.scrollTo(0,0)});
+  show("sTheory");
+}
+$("#thSel").onchange=e=>openTheory(e.target.value);
+$("#thExit").onclick=()=>{renderMenu();show("sMenu")};
+
+/* ---------- boot ---------- */
+function enterApp(){$("#editBtn").hidden=false;tick();renderMenu();show("sMenu")}
+if(user&&testAt){enterApp()}
+else{show("sName");if(user){$("#inName").value=user.n;$("#inSurname").value=user.s}}
+</script>
+
+</body>
+</html>
